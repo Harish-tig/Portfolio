@@ -1,0 +1,13 @@
+# IDEs / Editors
+.vscode/
+.idea/
+
+# Cache
+.cache/
+.pytest_cache/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
