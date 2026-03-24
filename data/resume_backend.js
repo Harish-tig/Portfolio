@@ -2,7 +2,7 @@ const resumeBackendData = {
   type: "backend",
   label: "Backend Developer Resume",
   contact: {
-    email: "nadarharish05gi@gmail.com",
+    email: "nadarharish03@gmail.com",
     github: "github.com/harish-tig",
     linkedin: "linkedin.com/in/harish-tig",
     location: "Mumbai, India",
