@@ -164,10 +164,20 @@
     let deleting = false;
     let paused = false;
 
-    const SPEED_TYPE   = 68;
-    const SPEED_DELETE = 38;
-    const PAUSE_END    = 1800;
-    const PAUSE_START  = 320;
+    const SPEED_TYPE   = 65;
+    const SPEED_DELETE = 35;
+    const PAUSE_END    = 2000;
+    const PAUSE_START  = 400;
+
+    function getTypingSpeed() {
+      const base = SPEED_TYPE + (Math.random() * 35 - 15);
+      return Math.max(30, base);
+    }
+
+    function getDeletingSpeed() {
+      const base = SPEED_DELETE + (Math.random() * 15 - 8);
+      return Math.max(25, base);
+    }
 
     function tick() {
       if (paused) return;
@@ -181,7 +191,7 @@
           setTimeout(() => { paused = false; deleting = true; tick(); }, PAUSE_END);
           return;
         }
-        setTimeout(tick, SPEED_TYPE + Math.random() * 22);
+        setTimeout(tick, getTypingSpeed());
       } else {
         charIdx--;
         el.textContent = current.slice(0, charIdx);
@@ -192,7 +202,7 @@
           setTimeout(() => { paused = false; tick(); }, PAUSE_START);
           return;
         }
-        setTimeout(tick, SPEED_DELETE);
+        setTimeout(tick, getDeletingSpeed());
       }
     }
 

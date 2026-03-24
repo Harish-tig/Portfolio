@@ -8,16 +8,17 @@
     code:     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`,
   };
 
-  // Terminal command sequence
-  const TERMINAL_LINES = [
-    { cmd: "$ git push origin main",         out: "→  Branch 'main' updated",         cls: "" },
-    { cmd: "$ GET /api/v1/connect",           out: "← 200 OK  — Connection established", cls: "t-ok" },
-    { cmd: "$ git pull --rebase",             out: "→  Already up to date.",             cls: "" },
-    { cmd: "$ POST /api/v1/message",          out: "← 201 Created  — Message queued",   cls: "t-ok" },
-    { cmd: "$ git fetch --all",               out: "→  Fetching origin…",               cls: "" },
-    { cmd: "$ DELETE /api/v1/silence",        out: "← 204 No Content  — Done",          cls: "t-ok" },
-    { cmd: "$ git commit -m 'reach out'",     out: "→  1 file changed, 0 insertions",   cls: "" },
-    { cmd: "$ GET /api/v1/collaborate",       out: "← 200 OK  — Always open",           cls: "t-ok" },
+  const TERMINAL_COMMANDS = [
+    { cmd: "git push origin main", out: "Enumerating objects: 12, done.\nDelta compression using up to 8 threads\nTotal 12 (delta 4), reused 0 (delta 0)\nTo github.com:harish-tig/portfolio.git\n   a4b2c1d..e5f6g7h  main -> main", cls: "t-ok" },
+    { cmd: "git pull --rebase", out: "remote: Enumerating objects: 5, done.\nremote: Counting objects: 100% (5/5), done.\nremote: Total 3 (delta 2), reused 0 (delta 0)\nFrom github.com:harish-tig/portfolio\n   e5f6g7h..i8j9k0l  main -> origin/main\nSuccessfully rebased and updated refs/heads/main.", cls: "t-ok" },
+    { cmd: "ls -la /home/harish/projects", out: "drwxr-xr-x  12 harish  staff   384 Mar 25 10:24 .\ndrwxr-xr-x  45 harish  staff  1440 Mar 25 09:15 ..\n-rw-r--r--   1 harish  staff  2048 Mar 24 18:30 README.md\ndrwxr-xr-x   8 harish  staff   256 Mar 25 10:20 .git", cls: "" },
+    { cmd: "chmod +x deploy.sh", out: "", cls: "" },
+    { cmd: "GET /api/v1/projects", out: "HTTP/1.1 200 OK\nContent-Type: application/json\nTransfer-Encoding: chunked\n\n{ \"status\": \"success\", \"data\": [ ... ] }", cls: "t-ok" },
+    { cmd: "POST /api/v1/contact", out: "HTTP/1.1 201 Created\nLocation: /api/v1/messages/502\n\n{ \"message\": \"Message queued successfully\" }", cls: "t-ok" },
+    { cmd: "python train_model.py", out: "Epoch 1/50\n250/250 [==============================] - 5s 20ms/step - loss: 0.4521 - accuracy: 0.8245\nEpoch 2/50\n250/250 [==============================] - 4s 18ms/step - loss: 0.3124 - accuracy: 0.8912", cls: "" },
+    { cmd: "ssh-keygen -t rsa -b 4096", out: "Generating public/private rsa key pair.\nEnter file in which to save the key (/home/harish/.ssh/id_rsa): \nYour identification has been saved in /home/harish/.ssh/id_rsa.\nYour public key has been saved in /home/harish/.ssh/id_rsa.pub.", cls: "t-ok" },
+    { cmd: "GET /api/v1/admin", out: "HTTP/1.1 401 Unauthorized\nWWW-Authenticate: Bearer realm=\"Access to the admin area\"\n\n{ \"error\": \"Authentication required\" }", cls: "t-warn" },
+    { cmd: "psql -U harish -d portfolio", out: "psql (14.5, server 14.4)\nType \"help\" for help.\n\nportfolio=# SELECT count(*) FROM visits;\n count \n-------\n  1284\n(1 row)", cls: "t-ok" },
   ];
 
   function init() {
@@ -31,12 +32,17 @@
           <h2 class="section-heading">${contactData.heading}</h2>
           <p class="contact-sub">${contactData.subtext}</p>
 
-          <!-- Backend terminal strip -->
+          <!-- Redesigned Terminal -->
           <div class="terminal-strip" aria-hidden="true">
-            <div class="terminal-strip-dots">
-              <span></span><span></span><span></span>
+            <div class="terminal-header">
+              <div class="terminal-strip-dots">
+                <span></span><span></span><span></span>
+              </div>
+              <div class="terminal-title">bash — portfolio — 80x24</div>
             </div>
-            <div class="terminal-lines" id="terminal-lines"></div>
+            <div class="terminal-body">
+              <div class="terminal-lines" id="terminal-lines"></div>
+            </div>
           </div>
 
           <div class="contact-grid">
@@ -60,50 +66,76 @@
     const container = document.getElementById("terminal-lines");
     if (!container) return;
 
-    let idx = 0;
-    const MAX_LINES = 3;
-    const lines = [];
+    const MAX_ENTRIES = 2;
+    let isTyping = false;
 
-    function addLine() {
-      const entry = TERMINAL_LINES[idx % TERMINAL_LINES.length];
-      idx++;
+    function typeText(element, text, speed = 40) {
+      return new Promise((resolve) => {
+        let charIdx = 0;
+        const cursor = document.createElement("span");
+        cursor.className = "t-cursor";
+        element.appendChild(cursor);
 
-      // cmd line
-      const cmdEl = document.createElement("div");
-      cmdEl.className = "t-line t-cmd";
-      cmdEl.textContent = entry.cmd;
-
-      // output line
-      const outEl = document.createElement("div");
-      outEl.className = `t-line t-out ${entry.cls}`;
-      outEl.textContent = entry.out;
-
-      container.appendChild(cmdEl);
-      container.appendChild(outEl);
-      lines.push(cmdEl, outEl);
-
-      // Trigger visible
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          cmdEl.classList.add("t-visible");
-          setTimeout(() => outEl.classList.add("t-visible"), 220);
-        });
+        function typeChar() {
+          if (charIdx < text.length) {
+            const char = text[charIdx];
+            cursor.before(char);
+            charIdx++;
+            // Randomize typing speed for realism
+            const variance = speed + (Math.random() * 40 - 20);
+            setTimeout(typeChar, Math.max(10, variance));
+          } else {
+            cursor.remove();
+            resolve();
+          }
+        }
+        typeChar();
       });
-
-      // Prune oldest pair when over limit
-      while (lines.length > MAX_LINES * 2) {
-        const old = lines.shift();
-        old.classList.add("t-fading");
-        setTimeout(() => old.remove(), 500);
-        const old2 = lines.shift();
-        old2.classList.add("t-fading");
-        setTimeout(() => old2.remove(), 500);
-      }
     }
 
-    // Start cycling
-    addLine();
-    setInterval(addLine, 2600);
+    async function addEntry() {
+      if (isTyping) return;
+      isTyping = true;
+
+      // Remove old entries if over limit
+      while (container.children.length >= MAX_ENTRIES * 2) {
+        container.removeChild(container.firstChild); // cmd
+        container.removeChild(container.firstChild); // out
+      }
+
+      const entry = TERMINAL_COMMANDS[Math.floor(Math.random() * TERMINAL_COMMANDS.length)];
+      
+      const cmdLine = document.createElement("div");
+      cmdLine.className = "t-line t-cmd";
+      cmdLine.innerHTML = `<span class="t-prompt">➜</span> <span class="t-content"></span>`;
+      container.appendChild(cmdLine);
+
+      const contentSpan = cmdLine.querySelector(".t-content");
+      
+      // Initial wait
+      await new Promise(r => setTimeout(r, 600 + Math.random() * 400));
+      
+      // Type command
+      await typeText(contentSpan, entry.cmd, 50);
+      
+      // Execution wait
+      await new Promise(r => setTimeout(r, 300 + Math.random() * 500));
+      
+      // Show output
+      if (entry.out) {
+        const outLine = document.createElement("div");
+        outLine.className = `t-line t-out ${entry.cls}`;
+        outLine.textContent = entry.out;
+        container.appendChild(outLine);
+      }
+
+      isTyping = false;
+      
+      // Schedule next entry
+      setTimeout(addEntry, 3000 + Math.random() * 2000);
+    }
+
+    addEntry();
   }
 
   document.addEventListener("DOMContentLoaded", init);

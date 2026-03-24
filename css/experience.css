@@ -9,7 +9,7 @@
 /* Two-column layout: main + sticky certs */
 .exp-layout {
   display: grid;
-  grid-template-columns: 1fr 320px;
+  grid-template-columns: 1fr 340px;
   gap: 4rem;
   align-items: start;
 }
@@ -18,8 +18,8 @@
 .exp-group {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
-  margin-bottom: 2.5rem;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
 }
 
 .exp-group:last-child {
@@ -29,44 +29,56 @@
 .exp-group-label {
   display: flex;
   align-items: center;
-  gap: 0.65rem;
+  gap: 0.75rem;
   font-family: var(--font-mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.14em;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--text-dim);
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.5rem;
 }
 
 .exp-group-dot {
-  width: 7px;
-  height: 7px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background: var(--accent);
   flex-shrink: 0;
-  box-shadow: 0 0 6px var(--accent-glow);
+  box-shadow: 0 0 10px var(--accent-glow);
 }
 
 .exp-group-dot--edu {
-  background: var(--border-accent);
+  background: var(--text-dim);
   box-shadow: none;
 }
 
-/* ── Experience Card ── */
+/* ── Experience Card (Dev Panel Redesign) ── */
 .exp-card {
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 1.6rem 1.75rem;
+  border-radius: 12px;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
-  gap: 0.9rem;
-  transition: border-color var(--transition-smooth),
-              box-shadow var(--transition-smooth),
-              transform var(--transition-smooth);
+  gap: 1.2rem;
+  transition: all var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
   /* reveal */
   opacity: 0;
-  transform: translateY(22px);
+  transform: translateY(25px);
+}
+
+.exp-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--accent);
+  opacity: 0;
+  transition: opacity 0.4s;
 }
 
 .exp-card.is-visible {
@@ -76,8 +88,12 @@
 
 .exp-card:hover {
   border-color: var(--border-accent);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.14), 0 0 20px var(--accent-glow);
-  transform: translateY(-4px);
+  box-shadow: var(--shadow-premium);
+  transform: translateY(-6px) scale(1.01);
+}
+
+.exp-card:hover::before {
+  opacity: 1;
 }
 
 .exp-card--edu {
@@ -99,12 +115,12 @@
 .exp-card-left {
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
+  gap: 0.3rem;
 }
 
 .exp-card-title {
   font-family: var(--font-display);
-  font-size: 1.15rem;
+  font-size: 1.25rem;
   font-weight: 500;
   color: var(--text-primary);
   line-height: 1.3;
@@ -116,29 +132,30 @@
 }
 
 .exp-card-org {
-  font-size: 0.88rem;
+  font-size: 0.95rem;
   color: var(--accent);
   font-family: var(--font-body);
+  font-weight: 500;
 }
 
 .exp-card-right {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 0.2rem;
+  gap: 0.4rem;
   flex-shrink: 0;
 }
 
 .exp-card-period {
   font-family: var(--font-mono);
-  font-size: 0.68rem;
-  color: var(--text-dim);
-  letter-spacing: 0.06em;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
   white-space: nowrap;
   background: var(--tag-bg);
   border: 1px solid var(--border);
-  padding: 0.2rem 0.65rem;
-  border-radius: 100px;
+  padding: 0.25rem 0.75rem;
+  border-radius: 6px;
 }
 
 .exp-card-location {
@@ -149,36 +166,41 @@
 }
 
 .exp-card-desc {
-  font-size: 0.88rem;
+  font-size: 0.95rem;
   color: var(--text-muted);
-  line-height: 1.72;
+  line-height: 1.75;
 }
 
 .exp-card-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem;
-  margin-top: 0.25rem;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
 }
 
 .exp-tag {
   font-family: var(--font-mono);
-  font-size: 0.63rem;
-  padding: 0.18rem 0.6rem;
-  border-radius: 100px;
+  font-size: 0.65rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
   background: var(--accent-light);
   color: var(--accent);
   border: 1px solid var(--border-accent);
   letter-spacing: 0.03em;
+  transition: all 0.3s ease;
 }
 
-/* ══════════════════════════════════════════
-   Sticky Certifications Panel
-══════════════════════════════════════════ */
+.exp-card:hover .exp-tag {
+  background: rgba(var(--accent-rgb), 0.15);
+  border-color: var(--accent);
+}
+
+/* ── Sticky Certifications Panel (System Card) ── */
 .certs-sticky-wrap {
   position: sticky;
   top: 110px;
   align-self: start;
+  will-change: transform;
 }
 
 .certs-panel {
@@ -186,67 +208,74 @@
   border: 1px solid var(--border);
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-  transition: box-shadow var(--transition-smooth),
-              border-color var(--transition-smooth);
+  transition: all var(--transition-smooth);
+  box-shadow: var(--shadow-lg);
+  position: relative;
 }
 
 .certs-panel:hover {
   border-color: var(--border-accent);
-  box-shadow: 0 10px 36px rgba(0,0,0,0.12), 0 0 24px var(--accent-glow);
+  box-shadow: var(--shadow-premium);
+  transform: translateY(-5px);
 }
 
 .certs-panel-header {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 1.1rem 1.4rem;
+  padding: 1rem 1.5rem;
   border-bottom: 1px solid var(--border);
-  background: var(--bg-secondary);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(8px);
+}
+
+.certs-panel:hover .certs-panel-header {
+  background: var(--accent-light);
+  border-bottom-color: var(--border-accent);
 }
 
 .certs-panel-icon {
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   background: var(--accent-light);
   border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  border: 1px solid var(--border-accent);
 }
 
 .certs-panel-icon svg {
-  width: 15px;
-  height: 15px;
+  width: 16px;
+  height: 16px;
   color: var(--accent);
 }
 
 .certs-panel-title {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.14em;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: var(--text-primary);
+  font-weight: 600;
 }
 
 .cert-list {
   display: flex;
   flex-direction: column;
-  padding: 0.5rem 0;
 }
 
 /* ── Cert Card ── */
 .cert-card {
   position: relative;
-  padding: 1rem 1.4rem;
+  padding: 1.25rem 1.5rem;
   border-bottom: 1px solid var(--border);
-  transition: background var(--transition-smooth),
-              padding-left var(--transition-smooth);
+  transition: all var(--transition-smooth);
   cursor: default;
   /* reveal */
   opacity: 0;
-  transform: translateX(12px);
+  transform: translateX(15px);
 }
 
 .cert-card.is-visible {
@@ -259,35 +288,34 @@
 }
 
 .cert-card:hover {
-  background: var(--accent-light);
-  padding-left: 1.8rem;
+  background: rgba(var(--accent-rgb), 0.05);
+  padding-left: 1.75rem;
 }
 
-.cert-card-bar {
+.cert-card::before {
+  content: "";
   position: absolute;
   left: 0;
   top: 0;
   bottom: 0;
-  width: 3px;
+  width: 4px;
   background: var(--accent);
-  border-radius: 0 2px 2px 0;
   transform: scaleY(0);
-  transform-origin: bottom;
-  transition: transform var(--transition-smooth);
+  transition: transform 0.4s var(--ease-out-expo);
 }
 
-.cert-card:hover .cert-card-bar {
+.cert-card:hover::before {
   transform: scaleY(1);
 }
 
 .cert-card-inner {
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
+  gap: 0.4rem;
 }
 
 .cert-card-title {
-  font-size: 0.88rem;
+  font-size: 0.9rem;
   font-weight: 500;
   color: var(--text-primary);
   line-height: 1.4;
@@ -307,24 +335,22 @@
 
 .cert-issuer {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.7rem;
   color: var(--text-dim);
   letter-spacing: 0.03em;
 }
 
 .cert-year {
   font-family: var(--font-mono);
-  font-size: 0.63rem;
+  font-size: 0.65rem;
   color: var(--accent);
   background: var(--accent-light);
   border: 1px solid var(--border-accent);
-  padding: 0.1rem 0.5rem;
-  border-radius: 100px;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
 }
 
-/* ══════════════════════════════════════════
-   Responsive
-══════════════════════════════════════════ */
+/* ── Responsive ── */
 @media (max-width: 960px) {
   .exp-layout {
     grid-template-columns: 1fr;
