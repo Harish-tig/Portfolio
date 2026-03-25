@@ -17,8 +17,47 @@
     localStorage.setItem(STORAGE_KEY, theme);
   }
 
+  // ── Ultra-smooth scroll with momentum ──
+  function setupSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener("click", (e) => {
+        const href = link.getAttribute("href");
+        if (href === "#") return;
+        const target = document.querySelector(href);
+        if (!target) return;
+        e.preventDefault();
+        smoothScrollTo(target);
+      });
+    });
+  }
+
+  function smoothScrollTo(target) {
+    const navHeight = 80;
+    const targetY = target.getBoundingClientRect().top + window.scrollY - navHeight;
+    const startY = window.scrollY;
+    const distance = targetY - startY;
+    const duration = Math.min(1200, Math.max(400, Math.abs(distance) * 0.5));
+    let startTime = null;
+
+    function easeInOutCubic(t) {
+      return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    }
+
+    function step(currentTime) {
+      if (!startTime) startTime = currentTime;
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const easedProgress = easeInOutCubic(progress);
+      window.scrollTo(0, startY + distance * easedProgress);
+      if (progress < 1) requestAnimationFrame(step);
+    }
+
+    requestAnimationFrame(step);
+  }
+
   function init() {
     applyTheme(getPreferred());
+
     const btn = document.getElementById("theme-toggle");
     if (btn) {
       btn.addEventListener("click", () => {
@@ -26,10 +65,12 @@
         applyTheme(isLight ? "dark" : "light");
       });
     }
+
+    setupSmoothScroll();
     initTechBgAnimations();
   }
 
-  // ── Background Tech Animations ──
+  // ── Background Tech Animations (Side Spaces) ──
   function initTechBgAnimations() {
 
     // ╔══════════════════════════════════════════════╗
@@ -37,10 +78,10 @@
     // ╠══════════════════════════════════════════════╣
     const CONFIG = {
       opacityMin:      0.55,   // minimum opacity (0 = invisible, 1 = fully solid)
-      opacityMax:      0.85,   // maximum opacity
-      spawnInterval:   1500,   // ms between each new snippet (lower = more frequent)
-      initialBatch:    8,     // how many spawn immediately on load
-      visibleDuration: 3500,   // ms each snippet stays visible before fading out
+      opacityMax:      0.80,   // maximum opacity
+      spawnInterval:   2500,   // ms between each new snippet (lower = more frequent)
+      initialBatch:    5,      // how many spawn immediately on load
+      visibleDuration: 3000,   // ms each snippet stays visible before fading out
       fadeTransition:  "0.4s ease", // CSS transition speed for fade in/out
     };
 
@@ -57,14 +98,13 @@
       "pip install -r requirements.txt",
       "ssh user@remote-host",
       "SELECT * FROM users;",
-      "sudo rm -rf",
+      "npm run build",
       "python train.py --epochs 50",
       "kubectl get pods",
       "redis-cli flushall",
       "curl -X POST localhost:8000",
       "grep -r 'TODO' .",
-      "sudo systemctl restart nginx",
-      "sudo rm -rf"
+      "sudo systemctl restart nginx"
     ];
 
     const container = document.createElement("div");
@@ -81,40 +121,30 @@
       snippet.style.transition = `opacity ${CONFIG.fadeTransition}, transform ${CONFIG.fadeTransition}`;
 
       const side = Math.random() > 0.5 ? "left" : "right";
-
-      if (side === "left") {
-        // Anchor from right edge so text grows leftward into the margin
-        const fromRight = 82 + Math.random() * 10; // right: 82–92% = left margin
-        snippet.style.right = `${fromRight}%`;
-      } else {
-        const x = 82 + Math.random() * 18;
-        snippet.style.left = `${x}%`;
-      }
-
+      const x = side === "left" ? (Math.random() * 12) : (88 + Math.random() * 12);
       const y = Math.random() * 90 + 5;
 
-      snippet.style.top = `${y}%`;
+      snippet.style.left = `${x}%`;
+      snippet.style.top  = `${y}%`;
       snippet.style.opacity = "0";
       snippet.style.transform = `translateY(${Math.random() * 20 - 10}px)`;
-
       container.appendChild(snippet);
 
       setTimeout(() => {
-        const opacity = CONFIG.opacityMin + Math.random() * (CONFIG.opacityMax - CONFIG.opacityMin);
-        snippet.style.opacity = opacity.toString();
+        snippet.style.opacity = (CONFIG.opacityMin + Math.random() * (CONFIG.opacityMax - CONFIG.opacityMin)).toString();
         snippet.style.transform = "translateY(0)";
 
         setTimeout(() => {
           snippet.style.opacity = "0";
           snippet.style.transform = `translateY(${Math.random() * -20}px)`;
-          setTimeout(() => snippet.remove(), 600);
+          setTimeout(() => snippet.remove(), 1000);
         }, CONFIG.visibleDuration);
       }, 100);
     }
 
     setInterval(createSnippet, CONFIG.spawnInterval);
     for (let i = 0; i < CONFIG.initialBatch; i++) {
-      setTimeout(createSnippet, i * 250);
+      setTimeout(createSnippet, i * 400);
     }
   }
 

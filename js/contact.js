@@ -9,21 +9,35 @@
   };
 
   const TERMINAL_COMMANDS = [
-    { cmd: "git push origin main", out: "Enumerating objects: 12, done.\nDelta compression using up to 8 threads\nTotal 12 (delta 4), reused 0 (delta 0)\nTo github.com:harish-tig/portfolio.git\n   a4b2c1d..e5f6g7h  main -> main", cls: "t-ok" },
-    { cmd: "git pull --rebase", out: "remote: Enumerating objects: 5, done.\nremote: Counting objects: 100% (5/5), done.\nremote: Total 3 (delta 2), reused 0 (delta 0)\nFrom github.com:harish-tig/portfolio\n   e5f6g7h..i8j9k0l  main -> origin/main\nSuccessfully rebased and updated refs/heads/main.", cls: "t-ok" },
-    { cmd: "ls -la /home/harish/projects", out: "drwxr-xr-x  12 harish  staff   384 Mar 25 10:24 .\ndrwxr-xr-x  45 harish  staff  1440 Mar 25 09:15 ..\n-rw-r--r--   1 harish  staff  2048 Mar 24 18:30 README.md\ndrwxr-xr-x   8 harish  staff   256 Mar 25 10:20 .git", cls: "" },
-    { cmd: "chmod +x deploy.sh", out: "", cls: "" },
-    { cmd: "GET /api/v1/projects", out: "HTTP/1.1 200 OK\nContent-Type: application/json\nTransfer-Encoding: chunked\n\n{ \"status\": \"success\", \"data\": [ ... ] }", cls: "t-ok" },
-    { cmd: "POST /api/v1/contact", out: "HTTP/1.1 201 Created\nLocation: /api/v1/messages/502\n\n{ \"message\": \"Message queued successfully\" }", cls: "t-ok" },
-    { cmd: "python train_model.py", out: "Epoch 1/50\n250/250 [==============================] - 5s 20ms/step - loss: 0.4521 - accuracy: 0.8245\nEpoch 2/50\n250/250 [==============================] - 4s 18ms/step - loss: 0.3124 - accuracy: 0.8912", cls: "" },
-    { cmd: "ssh-keygen -t rsa -b 4096", out: "Generating public/private rsa key pair.\nEnter file in which to save the key (/home/harish/.ssh/id_rsa): \nYour identification has been saved in /home/harish/.ssh/id_rsa.\nYour public key has been saved in /home/harish/.ssh/id_rsa.pub.", cls: "t-ok" },
-    { cmd: "GET /api/v1/admin", out: "HTTP/1.1 401 Unauthorized\nWWW-Authenticate: Bearer realm=\"Access to the admin area\"\n\n{ \"error\": \"Authentication required\" }", cls: "t-warn" },
-    { cmd: "psql -U harish -d portfolio", out: "psql (14.5, server 14.4)\nType \"help\" for help.\n\nportfolio=# SELECT count(*) FROM visits;\n count \n-------\n  1284\n(1 row)", cls: "t-ok" },
+    { cmd: "git status",         out: "On branch main\nYour branch is up to date with 'origin/main'.\nnothing to commit, working tree clean", cls: "" },
+    { cmd: "git push origin main",out: "Enumerating objects: 12, done.\nDelta compression using up to 8 threads\nTo github.com:harish-tig/portfolio.git\n   a4b2c1d..e5f6g7h  main → main", cls: "t-ok" },
+    { cmd: "ls -la ~/projects",  out: "drwxr-xr-x   harish  staff   384 Mar 25  .\ndrwxr-xr-x   harish  staff  1440 Mar 25  ..\n-rw-r--r--   harish  staff  2048 Mar 24  README.md\ndrwxr-xr-x   harish  staff   256 Mar 25  .git", cls: "" },
+    { cmd: "python train.py --epochs 50", out: "Epoch 1/50\n250/250 [==============================] - 5s 20ms/step - loss: 0.4521 - acc: 0.8245\nEpoch 2/50\n250/250 [==============================] - 4s 18ms/step - loss: 0.3124 - acc: 0.8912", cls: "" },
+    { cmd: "curl -s localhost:8000/api/v1/health", out: "HTTP/1.1 200 OK\nContent-Type: application/json\n\n{\"status\":\"healthy\",\"uptime\":\"3d 14h 22m\"}", cls: "t-ok" },
+    { cmd: "psql -U harish -d portfolio -c \"SELECT count(*) FROM visits;\"", out: " count\n-------\n  1284\n(1 row)", cls: "t-ok" },
+    { cmd: "GET /api/v1/admin",  out: "HTTP/1.1 401 Unauthorized\n{\"error\":\"Authentication required\"}", cls: "t-warn" },
+    { cmd: "docker ps --format 'table {{.Names}}\\t{{.Status}}'", out: "NAMES          STATUS\napi-server     Up 3 days\npostgres       Up 3 days\nredis          Up 3 days", cls: "" },
+    { cmd: "grep -rn 'TODO' src/ --include='*.py' | wc -l", out: "7", cls: "" },
   ];
 
   function init() {
     const section = document.getElementById("contact");
     if (!section || typeof contactData === "undefined") return;
+
+    // Contact cards — values become clickable hyperlinks
+    const cardsHTML = contactData.links.map(link => {
+      const isExternal = link.href.startsWith("http");
+      const target = isExternal ? '_blank' : '_self';
+      return `
+        <a class="contact-card" href="${link.href}" target="${target}" rel="${isExternal ? 'noopener noreferrer' : ''}">
+          <div class="contact-icon">${SVG_ICONS[link.icon] || ""}</div>
+          <div class="contact-info">
+            <div class="contact-label">${link.label}</div>
+            <div class="contact-value">${link.value}</div>
+          </div>
+        </a>
+      `;
+    }).join("");
 
     section.innerHTML = `
       <div class="section-wrap">
@@ -32,46 +46,48 @@
           <h2 class="section-heading">${contactData.heading}</h2>
           <p class="contact-sub">${contactData.subtext}</p>
 
-          <!-- Redesigned Terminal -->
+          <!-- Contact cards first -->
+          <div class="contact-grid">
+            ${cardsHTML}
+          </div>
+
+          <!-- Terminal below contact card -->
           <div class="terminal-strip" aria-hidden="true">
             <div class="terminal-header">
               <div class="terminal-strip-dots">
                 <span></span><span></span><span></span>
               </div>
-              <div class="terminal-title">bash — portfolio — 80x24</div>
+              <div class="terminal-title">harish@dev — ~/portfolio — zsh</div>
             </div>
             <div class="terminal-body">
               <div class="terminal-lines" id="terminal-lines"></div>
             </div>
           </div>
 
-          <div class="contact-grid">
-            ${contactData.links.map(link => `
-              <a class="contact-card" href="${link.href}" target="${link.href.startsWith("http") ? "_blank" : "_self"}" rel="noopener">
-                <div class="contact-icon">${SVG_ICONS[link.icon] || ""}</div>
-                <div class="contact-info">
-                  <div class="contact-label">${link.label}</div>
-                  <div class="contact-value">${link.value}</div>
-                </div>
-              </a>
-            `).join("")}
-          </div>
         </div>
       </div>`;
 
     initTerminal();
   }
 
+  // ── Realistic terminal with command history, styled prompt, blinking cursor ──
   function initTerminal() {
     const container = document.getElementById("terminal-lines");
     if (!container) return;
 
-    const MAX_ENTRIES = 2;
+    const MAX_HISTORY = 3;
     let isTyping = false;
+    const history = [];
 
-    function typeText(element, text, speed = 40) {
+    // Prompt HTML
+    function promptHTML() {
+      return `<span class="t-prompt-user">harish</span><span class="t-prompt-at">@</span><span class="t-prompt-host">dev</span><span class="t-prompt-path">:~/portfolio</span><span class="t-prompt-dollar">$</span>`;
+    }
+
+    function typeText(element, text, speed = 45) {
       return new Promise((resolve) => {
         let charIdx = 0;
+
         const cursor = document.createElement("span");
         cursor.className = "t-cursor";
         element.appendChild(cursor);
@@ -79,11 +95,10 @@
         function typeChar() {
           if (charIdx < text.length) {
             const char = text[charIdx];
-            cursor.before(char);
+            cursor.before(document.createTextNode(char));
             charIdx++;
-            // Randomize typing speed for realism
-            const variance = speed + (Math.random() * 40 - 20);
-            setTimeout(typeChar, Math.max(10, variance));
+            const variance = speed + (Math.random() * 35 - 18);
+            setTimeout(typeChar, Math.max(12, variance));
           } else {
             cursor.remove();
             resolve();
@@ -93,49 +108,76 @@
       });
     }
 
+    function renderHistory() {
+      // Render dim history above active area
+      const histHTML = history.map((entry, i) => {
+        const opacity = 0.3 + (i / history.length) * 0.3;
+        return `
+          <div class="t-history-entry" style="opacity:${opacity}">
+            <div class="t-line t-cmd">${promptHTML()} <span class="t-content">${escHTML(entry.cmd)}</span></div>
+            ${entry.out ? `<div class="t-line t-out ${entry.cls}">${escHTML(entry.out)}</div>` : ""}
+          </div>
+        `;
+      }).join("");
+      return histHTML;
+    }
+
+    function escHTML(str) {
+      return str.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+    }
+
     async function addEntry() {
       if (isTyping) return;
       isTyping = true;
 
-      // Remove old entries if over limit
-      while (container.children.length >= MAX_ENTRIES * 2) {
-        container.removeChild(container.firstChild); // cmd
-        container.removeChild(container.firstChild); // out
-      }
-
       const entry = TERMINAL_COMMANDS[Math.floor(Math.random() * TERMINAL_COMMANDS.length)];
-      
-      const cmdLine = document.createElement("div");
-      cmdLine.className = "t-line t-cmd";
-      cmdLine.innerHTML = `<span class="t-prompt">➜</span> <span class="t-content"></span>`;
-      container.appendChild(cmdLine);
 
-      const contentSpan = cmdLine.querySelector(".t-content");
-      
-      // Initial wait
-      await new Promise(r => setTimeout(r, 600 + Math.random() * 400));
-      
-      // Type command
-      await typeText(contentSpan, entry.cmd, 50);
-      
-      // Execution wait
-      await new Promise(r => setTimeout(r, 300 + Math.random() * 500));
-      
+      // Re-render container with history + new active line
+      container.innerHTML = renderHistory() + `
+        <div class="t-line t-cmd" id="t-active-cmd">${promptHTML()} <span class="t-content" id="t-type-target"></span></div>
+      `;
+
+      const typeTarget = document.getElementById("t-type-target");
+      if (!typeTarget) { isTyping = false; return; }
+
+      // Wait, then type
+      await new Promise(r => setTimeout(r, 500 + Math.random() * 400));
+      await typeText(typeTarget, entry.cmd, 48);
+
+      // Show blinking cursor briefly at end of command
+      const endCursor = document.createElement("span");
+      endCursor.className = "t-cursor";
+      typeTarget.appendChild(endCursor);
+
+      // Execution delay
+      await new Promise(r => setTimeout(r, 300 + Math.random() * 600));
+      endCursor.remove();
+
       // Show output
       if (entry.out) {
-        const outLine = document.createElement("div");
-        outLine.className = `t-line t-out ${entry.cls}`;
-        outLine.textContent = entry.out;
-        container.appendChild(outLine);
+        const activeCmd = document.getElementById("t-active-cmd");
+        if (activeCmd) {
+          const outLine = document.createElement("div");
+          outLine.className = `t-line t-out ${entry.cls}`;
+          outLine.textContent = entry.out;
+          activeCmd.insertAdjacentElement("afterend", outLine);
+        }
       }
 
+      // Push to history
+      history.push({ cmd: entry.cmd, out: entry.out || "", cls: entry.cls });
+      if (history.length > MAX_HISTORY) history.shift();
+
       isTyping = false;
-      
-      // Schedule next entry
-      setTimeout(addEntry, 3000 + Math.random() * 2000);
+      setTimeout(addEntry, 3500 + Math.random() * 2500);
     }
 
-    addEntry();
+    // Initial: render empty prompt with blinking cursor
+    container.innerHTML = `
+      <div class="t-line t-cmd">${promptHTML()} <span class="t-cursor"></span></div>
+    `;
+
+    setTimeout(addEntry, 1200);
   }
 
   document.addEventListener("DOMContentLoaded", init);

@@ -15,9 +15,9 @@
   --text-primary:    #f4f4f5;
   --text-muted:      #a1a1aa;
   --text-dim:        #52525b;
-  
-  /* Ruby/Crimson Accent - Premium, slightly desaturated */
-  --accent:          #9b111e; /* Ruby Red */
+
+  /* Ruby/Crimson Accent */
+  --accent:          #9b111e;
   --accent-rgb:      155, 17, 30;
   --accent-light:    rgba(155, 17, 30, 0.1);
   --accent-glow:     rgba(155, 17, 30, 0.2);
@@ -35,50 +35,77 @@
   --max-w: 1200px;
   --pad-x: clamp(1.5rem, 5vw, 6rem);
   --section-spacing: clamp(5rem, 10vw, 8rem);
-  
+
   /* ── Effects ── */
-  /* Premium Easing - Custom cubic-bezier */
   --ease-premium:      cubic-bezier(0.25, 0.46, 0.45, 0.94);
   --ease-out-expo:     cubic-bezier(0.19, 1, 0.22, 1);
   --ease-in-out-quart: cubic-bezier(0.77, 0, 0.175, 1);
-  
+
   --transition:        0.4s var(--ease-premium);
   --transition-smooth: 0.6s var(--ease-out-expo);
   --transition-bounce: 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
-  --transition-snappy:  0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  
-  --shadow-sm:   0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --glass-bg:        rgba(18, 18, 20, 0.7);
-  --glass-border:    rgba(255, 255, 255, 0.08);
-  --panel-shadow:    0 20px 50px rgba(0, 0, 0, 0.3);
-  --shadow-md:   0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg:   0 20px 40px rgba(0, 0, 0, 0.18);
-  --shadow-lift: 0 8px 24px rgba(0, 0, 0, 0.2), 0 2px 8px rgba(0, 0, 0, 0.12);
+  --transition-snappy: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+  --shadow-sm:      0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --glass-bg:       rgba(18, 18, 20, 0.7);
+  --glass-border:   rgba(255, 255, 255, 0.08);
+  --panel-shadow:   0 20px 50px rgba(0, 0, 0, 0.3);
+  --shadow-md:      0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg:      0 20px 40px rgba(0, 0, 0, 0.18);
+  --shadow-lift:    0 8px 24px rgba(0, 0, 0, 0.2), 0 2px 8px rgba(0, 0, 0, 0.12);
   --shadow-premium: 0 25px 50px rgba(0, 0, 0, 0.22), 0 0 40px var(--accent-glow);
 }
 
-/* ── Light theme ── */
+/* ══════════════════════════════════════════
+   Light Theme — Fully redesigned palette
+══════════════════════════════════════════ */
 body.light {
-  --bg-primary:      #fcfcfc;
-  --bg-secondary:    #f4f4f5;
-  --bg-card:         #ffffff;
-  --nav-bg:          rgba(252, 252, 252, 0.85);
-  --text-primary:    #18181b;
-  --text-muted:      #52525b;
-  --text-dim:        #a1a1aa;
-  --accent:          #b91c1c; /* Slightly brighter red for light mode visibility */
-  --accent-rgb:      185, 28, 28;
-  --accent-light:    rgba(185, 28, 28, 0.08);
-  --accent-glow:     rgba(185, 28, 28, 0.12);
-  --border:          rgba(0, 0, 0, 0.08);
-  --border-hover:    rgba(0, 0, 0, 0.14);
-  --border-accent:   rgba(185, 28, 28, 0.2);
-  --tag-bg:          rgba(0, 0, 0, 0.03);
+  /* Warm off-white base — not harsh white */
+  --bg-primary:    #f7f5f2;
+  --bg-secondary:  #efece8;
+  --bg-card:       #faf9f7;
+  --nav-bg:        rgba(247, 245, 242, 0.88);
+
+  /* High-contrast readable text */
+  --text-primary:  #1a1714;
+  --text-muted:    #4a4540;
+  --text-dim:      #9e9790;
+
+  /* Refined accent — deep ruby with better visibility on light bg */
+  --accent:          #a01020;
+  --accent-rgb:      160, 16, 32;
+  --accent-light:    rgba(160, 16, 32, 0.07);
+  --accent-glow:     rgba(160, 16, 32, 0.14);
+
+  /* Subtle borders — soft, not stark */
+  --border:          rgba(0, 0, 0, 0.07);
+  --border-hover:    rgba(0, 0, 0, 0.13);
+  --border-accent:   rgba(160, 16, 32, 0.22);
+  --tag-bg:          rgba(0, 0, 0, 0.04);
+
+  /* Elevated shadows for light mode depth */
+  --shadow-sm:      0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md:      0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.05);
+  --shadow-lg:      0 12px 28px rgba(0,0,0,0.1), 0 4px 8px rgba(0,0,0,0.06);
+  --shadow-lift:    0 8px 20px rgba(0,0,0,0.1), 0 2px 6px rgba(0,0,0,0.06);
+  --shadow-premium: 0 16px 40px rgba(0,0,0,0.12), 0 0 20px rgba(160,16,32,0.1);
+  --glass-bg:       rgba(247, 245, 242, 0.75);
+  --glass-border:   rgba(0, 0, 0, 0.08);
+  --panel-shadow:   0 12px 32px rgba(0, 0, 0, 0.1);
 }
 
+/* ── Smooth scroll with high-quality feel ── */
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  /* High-refresh smooth scroll */
+  scroll-padding-top: 80px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 body {
@@ -86,9 +113,11 @@ body {
   background: var(--bg-primary);
   color: var(--text-primary);
   line-height: 1.7;
-  transition: background var(--transition), color var(--transition);
+  transition: background 0.5s var(--ease-premium), color 0.5s var(--ease-premium);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 /* ── Subtle Texture ── */
@@ -99,8 +128,13 @@ body::before {
   z-index: 0;
   pointer-events: none;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-  opacity: 0.02;
+  opacity: 0.015;
   mix-blend-mode: overlay;
+}
+
+body.light::before {
+  opacity: 0.025;
+  mix-blend-mode: multiply;
 }
 
 /* Background Tech Animations Container */
@@ -116,11 +150,11 @@ body::before {
 .tech-bg-element {
   position: absolute;
   font-family: var(--font-mono);
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   color: var(--accent);
   opacity: 0;
   white-space: nowrap;
-  transition: opacity 0.4s ease;
+  transition: opacity 1s ease, transform 1s ease;
 }
 
 body > * { position: relative; z-index: 1; }
@@ -165,8 +199,8 @@ section {
 
 .section-label {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.15em;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--accent);
   display: flex;
@@ -196,7 +230,7 @@ section {
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.85rem 2rem;
+  padding: 0.875rem 2rem;
   background: var(--accent);
   color: #fff;
   font-family: var(--font-body);
@@ -207,10 +241,11 @@ section {
   border: none;
   cursor: pointer;
   transition: all var(--transition-smooth);
-  box-shadow: 0 6px 14px var(--accent-glow);
+  box-shadow: 0 4px 12px var(--accent-glow), 0 1px 3px rgba(0,0,0,0.2);
   position: relative;
   overflow: hidden;
   will-change: transform, box-shadow;
+  letter-spacing: 0.01em;
 }
 
 .btn-primary::after {
@@ -224,9 +259,9 @@ section {
 }
 
 .btn-primary:hover {
-  transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 20px 40px var(--accent-glow);
-  filter: brightness(1.1);
+  transform: translateY(-4px) scale(1.015);
+  box-shadow: 0 16px 36px var(--accent-glow), 0 4px 12px rgba(0,0,0,0.15);
+  filter: brightness(1.08);
 }
 
 .btn-primary:hover::after {
@@ -235,8 +270,7 @@ section {
 }
 
 .btn-primary:active {
-  transform: translateY(-2px) scale(0.96);
-  box-shadow: 0 8px 16px var(--accent-glow);
+  transform: translateY(-1px) scale(0.97);
   transition: all var(--transition-snappy);
 }
 
@@ -244,7 +278,7 @@ section {
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.85rem 2rem;
+  padding: 0.875rem 2rem;
   background: transparent;
   color: var(--text-primary);
   font-family: var(--font-body);
@@ -256,18 +290,23 @@ section {
   cursor: pointer;
   transition: all var(--transition-smooth);
   will-change: transform, box-shadow, border-color;
+  letter-spacing: 0.01em;
+}
+
+body.light .btn-outline {
+  box-shadow: var(--shadow-sm);
 }
 
 .btn-outline:hover {
   border-color: var(--accent);
   color: var(--accent);
   background: var(--accent-light);
-  transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 15px 30px var(--accent-glow);
+  transform: translateY(-4px) scale(1.015);
+  box-shadow: 0 12px 28px var(--accent-glow);
 }
 
 .btn-outline:active {
-  transform: translateY(-2px) scale(0.96);
+  transform: translateY(-1px) scale(0.97);
   transition: all var(--transition-snappy);
 }
 
@@ -275,7 +314,7 @@ section {
 .tag {
   font-family: var(--font-mono);
   font-size: 0.7rem;
-  padding: 0.35rem 0.9rem;
+  padding: 0.35rem 0.85rem;
   border-radius: 100px;
   background: var(--tag-bg);
   color: var(--text-muted);
@@ -284,26 +323,43 @@ section {
   will-change: transform, box-shadow, border-color;
 }
 
+body.light .tag {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
 .tag:hover {
   border-color: var(--accent);
   color: var(--accent);
   background: var(--accent-light);
-  transform: scale(1.1) translateY(-3px);
-  box-shadow: 0 8px 16px var(--accent-glow);
+  transform: scale(1.08) translateY(-2px);
+  box-shadow: 0 6px 14px var(--accent-glow);
 }
 
 /* ── Scrollbar ── */
-::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--border-hover); border-radius: 10px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* ── Scroll Progress Bar ── */
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), rgba(var(--accent-rgb), 0.4));
+  width: 0%;
+  z-index: 9999;
+  transition: width 0.1s linear;
+  box-shadow: 0 0 8px var(--accent-glow);
+}
 
 /* ── Reveal Animations ── */
 .reveal {
   opacity: 0;
   transform: translateY(30px);
-  transition: opacity 0.8s var(--ease-out-expo),
-              transform 0.8s var(--ease-out-expo);
+  transition: opacity 0.85s var(--ease-out-expo),
+              transform 0.85s var(--ease-out-expo);
   will-change: opacity, transform;
 }
 
@@ -315,8 +371,8 @@ section {
 .reveal-scale {
   opacity: 0;
   transform: translateY(20px) scale(0.97);
-  transition: opacity 0.8s var(--ease-out-expo),
-              transform 0.8s var(--ease-out-expo);
+  transition: opacity 0.85s var(--ease-out-expo),
+              transform 0.85s var(--ease-out-expo);
   will-change: opacity, transform;
 }
 
