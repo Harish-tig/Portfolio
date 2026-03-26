@@ -72,7 +72,7 @@
           <span class="hero-label">Available for opportunities</span>
           <h1 class="hero-heading">
             Hi, I am<br>
-            ${firstName + " "}<em>${lastName}.</em>
+            <span style="white-space:nowrap">${firstName + " "}<em>${lastName}.</em></span>
           </h1>
 
           <div class="hero-role-wrap">

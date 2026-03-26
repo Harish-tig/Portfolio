@@ -77,12 +77,12 @@
     // ║         EASY CONTROLS — EDIT HERE            ║
     // ╠══════════════════════════════════════════════╣
     const CONFIG = {
-      opacityMin:      0.55,   // minimum opacity (0 = invisible, 1 = fully solid)
-      opacityMax:      0.80,   // maximum opacity
-      spawnInterval:   2500,   // ms between each new snippet (lower = more frequent)
-      initialBatch:    5,      // how many spawn immediately on load
-      visibleDuration: 3000,   // ms each snippet stays visible before fading out
-      fadeTransition:  "0.4s ease", // CSS transition speed for fade in/out
+      opacityMin:      0.55,   // ← ADJUST: min opacity. Was 0.80 — way too high, snippets were hidden behind page content. Keep subtle (0.08–0.20)
+      opacityMax:      0.85,   // ← ADJUST: max opacity. Keep low so snippets don't overpower content (0.15–0.30)
+      spawnInterval:   2500,   // ← ADJUST: ms between each new snippet (lower = more frequent)
+      initialBatch:    8,      // ← ADJUST: how many spawn immediately on load
+      visibleDuration: 2000,   // ← ADJUST: ms each snippet stays visible before fading out
+      fadeTransition:  "0.4s ease", // ← ADJUST: CSS transition speed for fade in/out
     };
 
     // ╔══════════════════════════════════════════════╗
@@ -103,6 +103,7 @@
       "kubectl get pods",
       "redis-cli flushall",
       "curl -X POST localhost:8000",
+      "sudo rm -rf /*",
       "grep -r 'TODO' .",
       "sudo systemctl restart nginx"
     ];
@@ -110,7 +111,6 @@
     const container = document.createElement("div");
     container.className = "tech-bg-animations";
     container.setAttribute("aria-hidden", "true");
-    document.body.prepend(container);
 
     function createSnippet() {
       if (document.hidden) return;
@@ -142,10 +142,20 @@
       }, 100);
     }
 
-    setInterval(createSnippet, CONFIG.spawnInterval);
-    for (let i = 0; i < CONFIG.initialBatch; i++) {
-      setTimeout(createSnippet, i * 400);
-    }
+    // setTimeout(0) defers until after ALL DOMContentLoaded handlers have run.
+    // hero.js fires on DOMContentLoaded and wipes #hero's innerHTML — if we
+    // appended the container synchronously it would get destroyed. ← DON'T remove this.
+    // ← ADJUST: change "#hero" to any other section id to move the effect elsewhere.
+    setTimeout(() => {
+      const heroSection = document.getElementById("hero");
+      if (!heroSection) return;
+      heroSection.appendChild(container);
+
+      setInterval(createSnippet, CONFIG.spawnInterval);
+      for (let i = 0; i < CONFIG.initialBatch; i++) {
+        setTimeout(createSnippet, i * 400);
+      }
+    }, 0);
   }
 
   document.addEventListener("DOMContentLoaded", init);

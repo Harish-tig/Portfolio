@@ -139,9 +139,9 @@ body.light::before {
 
 /* Background Tech Animations Container */
 .tech-bg-animations {
-  position: fixed;
+  position: absolute; /* ← was: fixed (caused it to span entire page); absolute keeps it inside #hero which has position:relative */
   inset: 0;
-  z-index: 0;
+  z-index: 2; /* ← ADJUST: must be > 1 (body > * baseline) but below navbar z-index */
   pointer-events: none;
   overflow: hidden;
   user-select: none;

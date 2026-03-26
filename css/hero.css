@@ -222,6 +222,19 @@ body.light .hero-role-text {
   animation: heroReveal 1s var(--ease-out-expo) 0.4s forwards;
 }
 
+/* ── View Resume button: smaller, single-line ── */
+#view-resume-btn {
+  padding: 0.55rem 1.1rem;  /* ← ADJUST: vertical then horizontal padding */
+  font-size: 0.8rem;         /* ← ADJUST: label text size */
+  gap: 0.4rem;               /* ← ADJUST: space between icon and label */
+  white-space: nowrap;       /* keeps "View Resume" on one line always */
+}
+#view-resume-btn svg {
+  width: 14px;               /* ← ADJUST: icon size */
+  height: 14px;
+  flex-shrink: 0;
+}
+
 .hero-social {
   display: flex;
   align-items: center;
