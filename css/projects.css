@@ -322,7 +322,7 @@ body.light .pr-image {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
+  padding: 96px 2rem 2rem;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.4s var(--ease-premium);
@@ -345,10 +345,15 @@ body.light .modal-overlay {
   border-radius: 18px;
   border: 1px solid var(--border-accent);
   overflow-y: auto;
+  overscroll-behavior: contain;
   position: relative;
   transform: scale(0.92) translateY(32px);
   transition: transform 0.55s var(--ease-out-expo);
   box-shadow: 0 40px 100px rgba(0,0,0,0.55);
+}
+
+body.modal-open {
+  overflow: hidden;
 }
 
 body.light .modal {

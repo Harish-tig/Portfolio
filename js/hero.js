@@ -1,20 +1,20 @@
 // js/hero.js
 (function () {
   const ICONS = {
-    github:   `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>`,
+    github: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>`,
     linkedin: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>`,
-    mail:     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>`,
+    mail: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>`,
     download: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>`,
-    eye:      `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>`,
-    pin:      `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>`,
-    chevron:  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>`,
+    eye: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>`,
+    pin: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>`,
+    chevron: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>`,
   };
 
   const ICONS_SM = {
     email: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>`,
-    github:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>`,
+    github: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>`,
     link: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>`,
-    loc:  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>`,
+    loc: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>`,
   };
 
   // PDF directory structure:
@@ -22,28 +22,28 @@
   // resumes/ml/harish-nadar-ml.pdf
   const RESUME_PATHS = {
     backend: "resumes/backend/harish-nadar-backend.pdf",
-    ml:      "resumes/ml/harish-nadar-ml.pdf",
+    ml: "resumes/ml/harish-nadar-ml.pdf",
   };
 
   const LOG_LINES = [
-    { text: "GET  /api/v1/users                200  OK",           cls: "log-ok" },
-    { text: "POST /api/v1/auth/token           200  OK",           cls: "log-ok" },
-    { text: "GET  /api/v1/projects             200  OK",           cls: "log-ok" },
-    { text: "GET  /api/v1/skills               200  OK",           cls: "log-ok" },
-    { text: "POST /api/v1/predict              200  OK",           cls: "log-ok" },
-    { text: "DELETE /api/v1/cache              204  No Content",   cls: "log-ok" },
+    { text: "GET  /api/v1/users                200  OK", cls: "log-ok" },
+    { text: "POST /api/v1/auth/token           200  OK", cls: "log-ok" },
+    { text: "GET  /api/v1/projects             200  OK", cls: "log-ok" },
+    { text: "GET  /api/v1/skills               200  OK", cls: "log-ok" },
+    { text: "POST /api/v1/predict              200  OK", cls: "log-ok" },
+    { text: "DELETE /api/v1/cache              204  No Content", cls: "log-ok" },
     { text: "GET  /api/v1/admin                401  Unauthorized", cls: "log-warn" },
-    { text: "GET  /api/v1/resume?type=backend  200  OK",           cls: "log-ok" },
-    { text: "POST /api/v1/model/train          202  Accepted",     cls: "log-ok" },
-    { text: "GET  /api/v1/experience           200  OK",           cls: "log-ok" },
-    { text: "PUT  /api/v1/contact              200  OK",           cls: "log-ok" },
+    { text: "GET  /api/v1/resume?type=backend  200  OK", cls: "log-ok" },
+    { text: "POST /api/v1/model/train          202  Accepted", cls: "log-ok" },
+    { text: "GET  /api/v1/experience           200  OK", cls: "log-ok" },
+    { text: "PUT  /api/v1/contact              200  OK", cls: "log-ok" },
     { text: "GET  /api/v1/broken               500  Server Error", cls: "log-error" },
-    { text: "GET  /api/v1/about                200  OK",           cls: "log-ok" },
-    { text: "POST /api/v1/deploy               200  OK",           cls: "log-ok" },
-    { text: "GET  /ml/v1/predict?model=cnn     200  OK",           cls: "log-ok" },
-    { text: "GET  /api/v1/notfound             404  Not Found",    cls: "log-warn" },
-    { text: "POST /api/v1/auth/refresh         200  OK",           cls: "log-ok" },
-    { text: "GET  /api/v1/metrics              200  OK",           cls: "log-ok" },
+    { text: "GET  /api/v1/about                200  OK", cls: "log-ok" },
+    { text: "POST /api/v1/deploy               200  OK", cls: "log-ok" },
+    { text: "GET  /ml/v1/predict?model=cnn     200  OK", cls: "log-ok" },
+    { text: "GET  /api/v1/notfound             404  Not Found", cls: "log-warn" },
+    { text: "POST /api/v1/auth/refresh         200  OK", cls: "log-ok" },
+    { text: "GET  /api/v1/metrics              200  OK", cls: "log-ok" },
   ];
 
   function buildLogStream() {
@@ -59,7 +59,7 @@
 
     const nameParts = heroData.name.split(" ");
     const firstName = nameParts[0];
-    const lastName  = nameParts.slice(1).join(" ");
+    const lastName = nameParts.slice(1).join(" ");
 
     section.innerHTML = `
       <!-- Ambient backend log background -->
@@ -85,9 +85,6 @@
           <div class="hero-actions">
             <button class="btn-primary" id="view-resume-btn">
               ${ICONS.eye}&nbsp;${heroData.cta.view}
-            </button>
-            <button class="btn-outline" id="download-resume-btn">
-              ${ICONS.download}&nbsp;${heroData.cta.download}
             </button>
           </div>
 
@@ -141,14 +138,14 @@
             </button>
           </div>
           <!-- Download shortcuts row -->
-          <div class="resume-download-row">
+          <!-- comments <div class="resume-download-row">
             <a class="resume-download-btn" href="${RESUME_PATHS.backend}" download="harish-nadar-backend-resume.pdf">
               ${ICONS.download} Download Backend
             </a>
             <a class="resume-download-btn" href="${RESUME_PATHS.ml}" download="harish-nadar-ml-resume.pdf">
               ${ICONS.download} Download ML/AI
             </a>
-          </div>
+          </div> -->
         </div>
       </div>
 
@@ -158,8 +155,8 @@
           <div class="modal-header">
             <span class="modal-title" id="resume-view-title">Resume</span>
             <div style="display:flex;gap:0.75rem;align-items:center">
-              <a class="modal-close" id="resume-view-download" style="font-size:0.8rem;opacity:0.75;text-decoration:none;display:flex;align-items:center;gap:0.3rem" aria-label="Download PDF">
-                ${ICONS.download} PDF
+              <a class="resume-view-dl-btn" id="resume-view-download" aria-label="Download PDF">
+                ${ICONS.download} Download PDF
               </a>
               <button class="modal-close" id="resume-view-back" aria-label="Back" title="Back" style="font-size:0.9rem;opacity:0.7">← Back</button>
               <button class="modal-close" id="resume-view-close" aria-label="Close">✕</button>
@@ -190,12 +187,12 @@
     let roleIdx = 0;
     let charIdx = 0;
     let deleting = false;
-    let paused   = false;
+    let paused = false;
 
-    const SPEED_TYPE   = 60;
+    const SPEED_TYPE = 60;
     const SPEED_DELETE = 30;
-    const PAUSE_END    = 2200;
-    const PAUSE_START  = 350;
+    const PAUSE_END = 2200;
+    const PAUSE_START = 350;
 
     function getTypingSpeed() {
       return Math.max(28, SPEED_TYPE + (Math.random() * 30 - 15));
@@ -237,22 +234,26 @@
 
   // ── Resume modal logic ──
   function setupModals() {
-    const selectModal  = document.getElementById("resume-modal");
-    const viewModal    = document.getElementById("resume-view-modal");
-    const viewTitle    = document.getElementById("resume-view-title");
+    const selectModal = document.getElementById("resume-modal");
+    const viewModal = document.getElementById("resume-view-modal");
+    const viewTitle = document.getElementById("resume-view-title");
     const docContainer = document.getElementById("resume-doc-container");
-    const dlBtn        = document.getElementById("resume-view-download");
+    const dlBtn = document.getElementById("resume-view-download");
 
     let currentType = "backend";
 
-    function openSelect() { selectModal.classList.add("open"); }
-    function closeSelect() { selectModal.classList.remove("open"); }
+    function lockScroll() { document.body.classList.add("modal-open"); }
+    function unlockScroll() { document.body.classList.remove("modal-open"); }
+
+    function openSelect() { selectModal.classList.add("open"); lockScroll(); }
+    function closeSelect() { selectModal.classList.remove("open"); unlockScroll(); }
     function openView(type) {
       currentType = type;
       closeSelect();
+      lockScroll();
       const data = type === "backend"
         ? (typeof resumeBackendData !== "undefined" ? resumeBackendData : null)
-        : (typeof resumeMLData     !== "undefined" ? resumeMLData     : null);
+        : (typeof resumeMLData !== "undefined" ? resumeMLData : null);
 
       if (!data) return;
       viewTitle.textContent = data.label;
@@ -264,10 +265,9 @@
       docContainer.innerHTML = buildResumeDoc(data);
       viewModal.classList.add("open");
     }
-    function closeView() { viewModal.classList.remove("open"); }
+    function closeView() { viewModal.classList.remove("open"); unlockScroll(); }
 
     document.getElementById("view-resume-btn").addEventListener("click", openSelect);
-    document.getElementById("download-resume-btn").addEventListener("click", openSelect);
     document.getElementById("resume-modal-close").addEventListener("click", closeSelect);
     selectModal.addEventListener("click", (e) => { if (e.target === e.currentTarget) closeSelect(); });
 
@@ -379,7 +379,7 @@
   // ── Smooth scroll parallax on photo (moves with scroll, no static behavior) ──
   function setupScrollParallax() {
     const heroSection = document.getElementById("hero");
-    const heroRight   = document.querySelector(".hero-right");
+    const heroRight = document.querySelector(".hero-right");
     if (!heroSection || !heroRight) return;
 
     let ticking = false;
@@ -390,8 +390,8 @@
     document.addEventListener("mousemove", (e) => {
       if (!isInViewport(heroSection)) return;
       const rect = heroSection.getBoundingClientRect();
-      mouseX = ((e.clientX - rect.left) / rect.width  - 0.5) * 10;
-      mouseY = ((e.clientY - rect.top)  / rect.height - 0.5) * 10;
+      mouseX = ((e.clientX - rect.left) / rect.width - 0.5) * 10;
+      mouseY = ((e.clientY - rect.top) / rect.height - 0.5) * 10;
       requestUpdate();
     });
 

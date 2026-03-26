@@ -561,7 +561,11 @@ body.light .resume-type-btn {
 }
 
 /* ── Resume View Modal ── */
-#resume-view-modal .modal { max-width: 840px; }
+#resume-view-modal { align-items: flex-start; }
+#resume-view-modal .modal {
+  max-width: 840px;
+  max-height: calc(100vh - 112px);
+}
 
 .resume-doc {
   padding: 3rem;
@@ -679,4 +683,39 @@ body.light .resume-type-btn {
   .hero-photo-wrap {
     max-width: 300px;
   }
+}
+
+/* ── Resume View Modal — Download PDF Button ── */
+.resume-view-dl-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.5rem 1.1rem;
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 6px;
+  border: 1px solid var(--accent);
+  cursor: pointer;
+  transition: all var(--transition-smooth);
+  box-shadow: 0 4px 14px var(--accent-glow);
+  white-space: nowrap;
+}
+
+.resume-view-dl-btn:hover {
+  background: transparent;
+  color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px var(--accent-glow);
+}
+
+.resume-view-dl-btn svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
 }
