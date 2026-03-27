@@ -112,6 +112,34 @@ body.light .hero-logs .log-line.log-ok { opacity: 0.07; }
   z-index: 1;
 }
 
+@media (max-width: 900px) {
+  .hero-wrap {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    padding-top: 40px;
+    text-align: center;
+  }
+  .hero-left {
+    align-items: center;
+    margin-top: 0;
+  }
+  .hero-label, .hero-role-wrap {
+    justify-content: center;
+  }
+  .hero-tagline {
+    margin: 0 auto;
+  }
+  .hero-actions {
+    justify-content: center;
+  }
+  .hero-social {
+    justify-content: center;
+  }
+  .hero-logs {
+    display: none;
+  }
+}
+
 .hero-left {
   display: flex;
   margin-top: 50px;

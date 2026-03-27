@@ -36,7 +36,7 @@
     const targetY = target.getBoundingClientRect().top + window.scrollY - navHeight;
     const startY = window.scrollY;
     const distance = targetY - startY;
-    const duration = Math.min(1200, Math.max(400, Math.abs(distance) * 0.5));
+    const duration = Math.min(600, Math.max(200, Math.abs(distance) * 0.25)); // Speed up navigation significantly
     let startTime = null;
 
     function easeInOutCubic(t) {

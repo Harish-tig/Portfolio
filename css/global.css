@@ -32,9 +32,9 @@
   --font-mono:       'JetBrains Mono', monospace;
 
   /* ── Layout ── */
-  --max-w: 1200px;
-  --pad-x: clamp(1.5rem, 5vw, 6rem);
-  --section-spacing: clamp(5rem, 10vw, 8rem);
+  --max-w: 1000px; /* Increased further to 1280px to fix zoom appearance */
+  --pad-x: clamp(1rem, 5vw, 2rem);
+  --section-spacing: clamp(3rem, 8vw, 6rem);
 
   /* ── Effects ── */
   --ease-premium:      cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -96,16 +96,34 @@ body.light {
 
 /* ── Smooth scroll with high-quality feel ── */
 html {
-  scroll-behavior: smooth;
-  font-size: 16px;
-  /* High-refresh smooth scroll */
+  scroll-behavior: auto !important; /* Managed by JS for speed */
+  font-size: 12px !important; /* Aggressively reduced from 14px to fix the "zoomed" look */
   scroll-padding-top: 80px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
+@media (min-width: 1400px) {
   html {
-    scroll-behavior: smooth;
+    font-size: 14px !important; 
   }
+}
+
+@media (min-width: 2000px) {
+  html {
+    font-size: 15px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 11px !important;
+  }
+}
+
+/* Fix potential overflows causing mobile issues */
+body {
+  overflow-x: hidden !important;
+  width: 100vw;
+  position: relative;
 }
 
 body {

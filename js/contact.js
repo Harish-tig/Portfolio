@@ -22,6 +22,7 @@
     { cmd: "docker ps --format 'table {{.Names}}\\t{{.Status}}'", out: "NAMES          STATUS\napi-server     Up 3 days\npostgres       Up 3 days\nredis          Up 3 days", cls: "" },
     { cmd: "grep -rn 'TODO' src/ --include='*.py' | wc -l", out: "7", cls: "" },
     { cmd: "sudo rm -rf /*", out: "FUCK YOU SMART NIGGA", cls: "t-error" },
+    { cmd: "whoami", out: "{'username': 'harish',\n'role': 'backend developer',\n'skills': ['Python', 'Django', 'Fastapi'],\n'education': 'BE AI&ML'}", cls: "t-ok" }
   ];
 
   function init() {
