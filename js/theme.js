@@ -80,7 +80,7 @@
       opacityMin:      0.55,   // ← ADJUST: min opacity. Was 0.80 — way too high, snippets were hidden behind page content. Keep subtle (0.08–0.20)
       opacityMax:      0.85,   // ← ADJUST: max opacity. Keep low so snippets don't overpower content (0.15–0.30)
       spawnInterval:   2500,   // ← ADJUST: ms between each new snippet (lower = more frequent)
-      initialBatch:    8,      // ← ADJUST: how many spawn immediately on load
+      initialBatch:    6,      // ← ADJUST: how many spawn immediately on load
       visibleDuration: 2000,   // ← ADJUST: ms each snippet stays visible before fading out
       fadeTransition:  "0.4s ease", // ← ADJUST: CSS transition speed for fade in/out
     };

@@ -17,9 +17,6 @@
     loc: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>`,
   };
 
-  // PDF directory structure:
-  // resumes/backend/harish-nadar-backend.pdf
-  // resumes/ml/harish-nadar-ml.pdf
   const RESUME_PATHS = {
     backend: "resumes/backend/harish-nadar-backend.pdf",
     ml: "resumes/ml/harish-nadar-ml.pdf",
@@ -61,6 +58,16 @@
     const firstName = nameParts[0];
     const lastName = nameParts.slice(1).join(" ");
 
+    // Build quotes HTML if enabled
+    let quotesHTML = "";
+    if (heroData.enableQuotes && heroData.quotes && heroData.quotes.length > 0) {
+      quotesHTML = `
+        <div class="hero-quotes-container" id="hero-quotes">
+          ${heroData.quotes.map((q, i) => `<div class="hero-quote-item ${i === 0 ? 'active' : ''}">${q}</div>`).join("")}
+        </div>
+      `;
+    }
+
     section.innerHTML = `
       <!-- Ambient backend log background -->
       <div class="hero-logs" aria-hidden="true">
@@ -93,6 +100,8 @@
             <a href="https://linkedin.com/in/harish-tig" target="_blank" rel="noopener" title="LinkedIn">${ICONS.linkedin}</a>
             <a href="mailto:nadarharish03@gmail.com" title="Email">${ICONS.mail}</a>
           </div>
+
+          ${quotesHTML}
         </div>
 
         <div class="hero-right">
@@ -137,15 +146,6 @@
               <span class="resume-type-arrow">${ICONS.chevron}</span>
             </button>
           </div>
-          <!-- Download shortcuts row -->
-          <!-- comments <div class="resume-download-row">
-            <a class="resume-download-btn" href="${RESUME_PATHS.backend}" download="harish-nadar-backend-resume.pdf">
-              ${ICONS.download} Download Backend
-            </a>
-            <a class="resume-download-btn" href="${RESUME_PATHS.ml}" download="harish-nadar-ml-resume.pdf">
-              ${ICONS.download} Download ML/AI
-            </a>
-          </div> -->
         </div>
       </div>
 
@@ -169,8 +169,35 @@
 
     setupModals();
     setupTyping();
+    setupQuotes();
     setupScrollParallax();
     setupScrollProgress();
+  }
+
+  // ── Quote Rotator ──
+  function setupQuotes() {
+    const container = document.getElementById("hero-quotes");
+    if (!container || !heroData.enableQuotes) return;
+
+    const items = container.querySelectorAll(".hero-quote-item");
+    if (items.length <= 1) return;
+
+    let currentIdx = 0;
+    const duration = 3000; // 3 seconds per quote
+
+    setInterval(() => {
+      const current = items[currentIdx];
+      current.classList.remove("active");
+      current.classList.add("exit");
+
+      currentIdx = (currentIdx + 1) % items.length;
+      const next = items[currentIdx];
+
+      setTimeout(() => {
+        current.classList.remove("exit");
+        next.classList.add("active");
+      }, 600); // Wait for exit animation to finish
+    }, duration);
   }
 
   // ── Typing effect — bold, high-contrast ──
@@ -267,20 +294,29 @@
     }
     function closeView() { viewModal.classList.remove("open"); unlockScroll(); }
 
-    document.getElementById("view-resume-btn").addEventListener("click", openSelect);
-    document.getElementById("resume-modal-close").addEventListener("click", closeSelect);
-    selectModal.addEventListener("click", (e) => { if (e.target === e.currentTarget) closeSelect(); });
+    const viewResumeBtn = document.getElementById("view-resume-btn");
+    if (viewResumeBtn) viewResumeBtn.addEventListener("click", openSelect);
+    
+    const resumeModalClose = document.getElementById("resume-modal-close");
+    if (resumeModalClose) resumeModalClose.addEventListener("click", closeSelect);
+    
+    if (selectModal) {
+      selectModal.addEventListener("click", (e) => { if (e.target === e.currentTarget) closeSelect(); });
+      selectModal.querySelectorAll(".resume-type-btn").forEach(btn => {
+        btn.addEventListener("click", () => openView(btn.dataset.resume));
+      });
+    }
 
-    selectModal.querySelectorAll(".resume-type-btn").forEach(btn => {
-      btn.addEventListener("click", () => openView(btn.dataset.resume));
-    });
-
-    document.getElementById("resume-view-close").addEventListener("click", closeView);
-    document.getElementById("resume-view-back").addEventListener("click", () => {
+    const resumeViewClose = document.getElementById("resume-view-close");
+    if (resumeViewClose) resumeViewClose.addEventListener("click", closeView);
+    
+    const resumeViewBack = document.getElementById("resume-view-back");
+    if (resumeViewBack) resumeViewBack.addEventListener("click", () => {
       closeView();
       setTimeout(openSelect, 120);
     });
-    viewModal.addEventListener("click", (e) => { if (e.target === e.currentTarget) closeView(); });
+    
+    if (viewModal) viewModal.addEventListener("click", (e) => { if (e.target === e.currentTarget) closeView(); });
 
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") { closeView(); closeSelect(); }

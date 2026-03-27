@@ -34,4 +34,15 @@ const contactData = {
       icon: "code",
     },
   ],
+  stickyCommand: ["whoami", "git status", "ls -la ~/projects", "clear"],
+  availableCommands: [
+    "whoami",
+    "git status",
+    "ls -la ~/projects",
+    "python train.py --epochs 50",
+    "curl -s localhost:8000/api/v1/health",
+    "docker ps",
+    "grep -rn 'TODO' src/ --include='*.py' | wc -l",
+    "clear"
+  ]
 };
