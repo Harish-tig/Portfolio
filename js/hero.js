@@ -22,34 +22,6 @@
     ml: "resumes/ml/harish-nadar-ml.pdf",
   };
 
-  const LOG_LINES = [
-    { text: "GET  /api/v1/users                200  OK", cls: "log-ok" },
-    { text: "POST /api/v1/auth/token           200  OK", cls: "log-ok" },
-    { text: "GET  /api/v1/projects             200  OK", cls: "log-ok" },
-    { text: "GET  /api/v1/skills               200  OK", cls: "log-ok" },
-    { text: "POST /api/v1/predict              200  OK", cls: "log-ok" },
-    { text: "DELETE /api/v1/cache              204  No Content", cls: "log-ok" },
-    { text: "GET  /api/v1/admin                401  Unauthorized", cls: "log-warn" },
-    { text: "GET  /api/v1/resume?type=backend  200  OK", cls: "log-ok" },
-    { text: "POST /api/v1/model/train          202  Accepted", cls: "log-ok" },
-    { text: "GET  /api/v1/experience           200  OK", cls: "log-ok" },
-    { text: "PUT  /api/v1/contact              200  OK", cls: "log-ok" },
-    { text: "GET  /api/v1/broken               500  Server Error", cls: "log-error" },
-    { text: "GET  /api/v1/about                200  OK", cls: "log-ok" },
-    { text: "POST /api/v1/deploy               200  OK", cls: "log-ok" },
-    { text: "GET  /ml/v1/predict?model=cnn     200  OK", cls: "log-ok" },
-    { text: "GET  /api/v1/notfound             404  Not Found", cls: "log-warn" },
-    { text: "POST /api/v1/auth/refresh         200  OK", cls: "log-ok" },
-    { text: "GET  /api/v1/metrics              200  OK", cls: "log-ok" },
-  ];
-
-  function buildLogStream() {
-    const doubled = [...LOG_LINES, ...LOG_LINES];
-    return doubled.map(l =>
-      `<div class="log-line ${l.cls}">${l.text}</div>`
-    ).join("");
-  }
-
   function render() {
     const section = document.getElementById("hero");
     if (!section || typeof heroData === "undefined") return;
@@ -69,11 +41,6 @@
     }
 
     section.innerHTML = `
-      <!-- Ambient backend log background -->
-      <div class="hero-logs" aria-hidden="true">
-        <div class="log-stream">${buildLogStream()}</div>
-      </div>
-
       <div class="hero-wrap">
         <div class="hero-left">
           <span class="hero-label">Available for opportunities</span>
