@@ -5,7 +5,7 @@
     const section = document.getElementById("experience");
     if (!section || typeof experienceData === "undefined") return;
 
-    const { experience, education, certifications } = experienceData;
+    const { experience, certifications } = experienceData;
 
     section.innerHTML = `
       <div class="section-wrap">
@@ -24,13 +24,6 @@
                 ${experience.map(e => buildExpCard(e)).join("")}
               </div>
             ` : ""}
-
-            <div class="exp-group">
-              <div class="exp-group-label">
-                <span class="exp-group-dot exp-group-dot--edu"></span>Education
-              </div>
-              ${education.map(e => buildEduCard(e)).join("")}
-            </div>
 
           </div>
 

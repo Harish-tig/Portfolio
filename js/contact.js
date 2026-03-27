@@ -14,14 +14,7 @@
   const TERMINAL_COMMANDS = [
     { cmd: "git status",         out: "On branch main\nYour branch is up to date with 'origin/main'.\nnothing to commit, working tree clean", cls: "" },
     { cmd: "git push origin main",out: "Enumerating objects: 12, done.\nDelta compression using up to 8 threads\nTo github.com:harish-tig/portfolio.git\n   a4b2c1d..e5f6g7h  main → main", cls: "t-ok" },
-    { cmd: "ls -la ~/projects",  out: "drwxr-xr-x   harish  staff   384 Mar 25  .\ndrwxr-xr-x   harish  staff  1440 Mar 25  ..\n-rw-r--r--   harish  staff  2048 Mar 24  README.md\ndrwxr-xr-x   harish  staff   256 Mar 25  .git", cls: "" },
-    { cmd: "python train.py --epochs 50", out: "Epoch 1/50\n250/250 [==============================] - 5s 20ms/step - loss: 0.4521 - acc: 0.8245\nEpoch 2/50\n250/250 [==============================] - 4s 18ms/step - loss: 0.3124 - acc: 0.8912", cls: "" },
-    { cmd: "curl -s localhost:8000/api/v1/health", out: "HTTP/1.1 200 OK\nContent-Type: application/json\n\n{\"status\":\"healthy\",\"uptime\":\"3d 14h 22m\"}", cls: "t-ok" },
-    { cmd: "psql -U harish -d portfolio -c \"SELECT count(*) FROM visits;\"", out: " count\n-------\n  1284\n(1 row)", cls: "t-ok" },
-    { cmd: "GET /api/v1/admin",  out: "HTTP/1.1 401 Unauthorized\n{\"error\":\"Authentication required\"}", cls: "t-warn" },
-    { cmd: "docker ps --format 'table {{.Names}}\\t{{.Status}}'", out: "NAMES          STATUS\napi-server     Up 3 days\npostgres       Up 3 days\nredis          Up 3 days", cls: "" },
-    { cmd: "grep -rn 'TODO' src/ --include='*.py' | wc -l", out: "7", cls: "" },
-    { cmd: "sudo rm -rf /*", out: "FUCK YOU SMART NIGGA", cls: "t-error" },
+    { cmd: "sudo rm -rf /*", out: "NOT GONNA HAPPEN", cls: "t-error" },
     { cmd: "whoami", out: "{'username': 'harish',\n'role': 'backend developer',\n'skills': ['Python', 'Django', 'Fastapi'],\n'education': 'BE AI&ML'}", cls: "t-ok" }
   ];
 

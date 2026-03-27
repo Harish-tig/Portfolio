@@ -251,7 +251,7 @@ body.light .education-card:hover {
 
 .education-period {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   color: var(--accent);
   letter-spacing: 0.1em;
   font-weight: 600;
@@ -259,8 +259,9 @@ body.light .education-card:hover {
 
 .education-detail {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
-  color: var(--text-dim);
+  font-weight: bold;
+  font-size: 0.8rem;
+  color: whitesmoke;
   letter-spacing: 0.05em;
   display: flex;
   align-items: center;

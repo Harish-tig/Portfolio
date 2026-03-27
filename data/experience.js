@@ -3,32 +3,31 @@ const experienceData = {
   /* ── Work Experience ── */
   experience: [
     {
-      title: "Software Development Engineer Intern",
-      org: "Stealth-Mode Startup",
-      period: "Jan 2025 — Mar 2025",
+      title: "10x Growth Flutter Dev Intern",
+      org: "NGO Startup",
+      period: "Mar 2025 — June 2025",
       location: "Remote",
       description:
-        "Contributed to backend microservice architecture using FastAPI and PostgreSQL. Implemented JWT-based authentication flows and optimised API response times by ~35% through query-level caching with Redis.",
-      tags: ["FastAPI", "PostgreSQL", "Redis", "JWT"],
+        "Designed and implemented a statefull and stateless widget architecture for the NGO's mobile app, enabling dynamic content rendering and seamless user interactions.",
+      tags: ["Flutter", "Dart", "Supabase", "GitHub"],
+    },
+    {
+      title: "Django-DRF Backend Engineer Intern",
+      org: "Online Travel Agency Startup",
+      period: "Mar 2026 — Current",
+      location: "Remote",
+      description:
+        "Developed a robust backend API's using Django and Django REST Framework to support the startup's travel booking platform. Worked on features such as Channel Management, PMS via Bakun Api.",
+      tags: ["Django", "Django REST Framework", "PostgreSQL", "JWT"],
     },
   ],
 
-  /* ── Education ── */
-  education: [
-    {
-      title: "B.E. in Artificial Intelligence & Machine Learning",
-      org: "Mumbai University",
-      period: "2022 — 2026",
-      description:
-        "Final year student. Core coursework: Machine Learning, Deep Learning, DBMS, Computer Networks, Data Structures & Algorithms, Operating Systems.",
-    },
-  ],
 
   /* ── Certifications ── */
   certifications: [
-    { title: "Python for AIML",                issuer: "SAP Edunet Foundation", year: "2024" },
     { title: "Data Science & ML Using Python",  issuer: "Udemy",                year: "2026" },
-    { title: "Python Advanced Course",          issuer: "Udemy",                year: "2023" },
+    { title: "Python for AIML",                issuer: "SAP Edunet Foundation", year: "2024" },
+    { title: "Advanced Python Course",          issuer: "Udemy",                year: "2023" },
   ],
 
   /* ── Competitive Achievements ── */
@@ -55,7 +54,7 @@ const experienceData = {
     },
     {
       rank: "03",
-      badge: "🥈",
+      badge: "🥉",
       title: "Top 10 — NMIMS HACKX 3.0",
       org: "NMIMS University",
       period: "2025",
@@ -73,15 +72,16 @@ const experienceData = {
       org: "Student's Council, Mumbai University",
       period: "2025 — Present",
       description:
-        "Lead technical strategy and execution for the college student council. Architected internal tooling, managed cross-functional tech teams, and delivered campus-wide digital initiatives.",
+        "Lead technical strategy and execution for the college student council. Maintained college eventwebsite.",
     },
     {
-      icon: "⚽",
-      title: "Football — District Representative",
-      org: "Mumbai District Sports Committee",
-      period: "2022 — 2024",
+      icon: "⚙",
+      title: "Joint PRO Head",
+      org: "Student's Council, Mumbai University",
+      period: "2024 — 2025",
       description:
-        "Selected to represent the district in inter-collegiate football tournaments. Competed at the regional level across two consecutive seasons.",
+        "Managed public relations and communications for the student council. Coordinated with external stakeholders to promote college events and initiatives.",
     },
+    
   ],
 };
