@@ -139,8 +139,21 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  font-size: 1.5rem;
   transition: all var(--transition-smooth);
+}
+
+.ach-badge-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  transition: color var(--transition-smooth);
+}
+
+.ach-item:hover .ach-badge-icon {
+  color: #fff;
 }
 
 .ach-item:hover .ach-badge-wrap {
@@ -290,10 +303,11 @@
 /* ── Activity Item ── */
 .act-item {
   display: flex;
-  gap: 1rem;
-  padding: 1.25rem 1.5rem;
+  gap: 1.25rem;
+  padding: 1.5rem;
   border-bottom: 1px solid var(--border);
   transition: all var(--transition-smooth);
+  position: relative;
   /* reveal */
   opacity: 0;
   transform: translateY(15px);
@@ -330,11 +344,19 @@
 }
 
 .act-item-icon {
-  font-size: 1.4rem;
-  line-height: 1;
   flex-shrink: 0;
-  width: 28px;
-  text-align: center;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  margin-top: 0.2rem;
+}
+
+.act-item-icon svg {
+  width: 18px;
+  height: 18px;
 }
 
 .act-item-body {

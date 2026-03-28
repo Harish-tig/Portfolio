@@ -16,12 +16,20 @@
           </div>
           <div class="about-stats-container">
             <div class="about-stats">
-              ${aboutData.stats.map(s => `
-                <div class="about-stat">
-                  <div class="stat-value">${s.value}</div>
-                  <div class="stat-label">${s.label}</div>
-                </div>
-              `).join("")}
+              <div class="about-stats-header">
+                <span class="about-stats-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                </span>
+                <span class="about-stats-title">At a Glance</span>
+              </div>
+              <div class="about-stats-grid">
+                ${aboutData.stats.map(s => `
+                  <div class="about-stat">
+                    <span class="stat-label">${s.label}</span>
+                    <span class="stat-value">${s.value}</span>
+                  </div>
+                `).join("")}
+              </div>
             </div>
           </div>
         </div>
