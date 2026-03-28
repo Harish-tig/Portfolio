@@ -414,7 +414,9 @@ body.light .modal {
 }
 
 .modal-image {
-  width: 100%;
+  width: 70%;
+  height: auto;
+  margin: 0 auto;
   border-radius: 10px;
   border: 1px solid var(--border);
   box-shadow: var(--shadow-lg);

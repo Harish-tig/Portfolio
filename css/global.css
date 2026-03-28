@@ -330,15 +330,15 @@ body.light .btn-outline {
 
 /* ── Tag ── */
 .tag {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  padding: 0.35rem 0.85rem;
-  border-radius: 100px;
-  background: var(--tag-bg);
-  color: var(--text-muted);
-  border: 1px solid var(--border);
-  transition: all var(--transition-smooth);
-  will-change: transform, box-shadow, border-color;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;          /* increased from 0.7 */
+    padding: 0.5rem 1.1rem;      /* more breathing space */
+    border-radius: 100px;
+    background: var(--tag-bg);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    transition: all var(--transition-smooth);
+    will-change: transform, box-shadow, border-color;
 }
 
 body.light .tag {

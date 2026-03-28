@@ -763,7 +763,7 @@ body.light .resume-type-btn {
 }
 /* ── Hero Quote Rotator ── */
 .hero-quotes-container {
-  margin-top: 2.8rem;
+  margin-top: 0.2rem;
   min-height: 5.5rem;
   max-width: 800px;
   display: flex;

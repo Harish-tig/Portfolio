@@ -12,10 +12,20 @@
   };
 
   const TERMINAL_COMMANDS = [
-    { cmd: "git status",         out: "On branch main\nYour branch is up to date with 'origin/main'.\nnothing to commit, working tree clean", cls: "" },
-    { cmd: "git push origin main",out: "Enumerating objects: 12, done.\nDelta compression using up to 8 threads\nTo github.com:harish-tig/portfolio.git\n   a4b2c1d..e5f6g7h  main → main", cls: "t-ok" },
+  { cmd: "git status", out: "On branch main\nYour branch is up to date with 'origin/main'.\nnothing to commit, working tree clean", cls: "" },
+  { cmd: "git push origin main", out: "Enumerating objects: 12, done.\nDelta compression using up to 8 threads\nTo github.com:harish-tig/portfolio.git\n   a4b2c1d..e5f6g7h  main → main", cls: "t-ok" },
+  { cmd: "python manage.py runserver", out: "Starting development server at http://127.0.0.1:8000/\nQuit the server with CONTROL-C.", cls: "" },
+  { cmd: "uvicorn app:app --reload", out: "Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)\nStarted reloader process", cls: "" },
+  { cmd: "redis-cli ping", out: "PONG", cls: "t-ok" },
+  { cmd: "docker ps", out: "CONTAINER ID   IMAGE        STATUS\nc1a2b3d4e5     fastapi-app  Up 2 hours", cls: "" },
+  { cmd: "pytest", out: "================= test session starts =================\ncollected 12 items\n\n12 passed in 1.23s", cls: "t-ok" },
+  { cmd: "curl /api/v1/users", out: "[{'id':1,'name':'Harish'},{'id':2,'name':'Ninja'}]", cls: "" },
+  { cmd: "localseva --status", out: "System online\nActive users: 124\nServices running: API, Auth, Booking", cls: "t-ok" },
+];
+  const USER_INTERACTION_COMMANDS = [
+    { cmd: "whoami", out: "{'username': 'harish',\n'role': 'backend developer',\n'skills': ['Python', 'Django', 'Fastapi'],\n'education': 'BE AI&ML'}", cls: "t-ok" },
     { cmd: "sudo rm -rf /*", out: "NOT GONNA HAPPEN", cls: "t-error" },
-    { cmd: "whoami", out: "{'username': 'harish',\n'role': 'backend developer',\n'skills': ['Python', 'Django', 'Fastapi'],\n'education': 'BE AI&ML'}", cls: "t-ok" }
+    { cmd: "exit", out: "logout\nSession terminated.", cls: "" },
   ];
 
   function init() {
@@ -274,7 +284,7 @@
           if (cmd === "clear") {
             history.length = 0;
           } else {
-            const found = TERMINAL_COMMANDS.find(c => c.cmd === cmd);
+            const found = USER_INTERACTION_COMMANDS.find(c => c.cmd === cmd);
             history.push({
               cmd: cmd,
               out: found ? found.out : `zsh: command not found: ${cmd}`,

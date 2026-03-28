@@ -1,7 +1,7 @@
 const heroData = {
   name: "Harish Nadar",
   title: "Backend Developer & AI/ML Engineer",
-  tagline: "I build robust APIs and train models that actually work in production.",
+  tagline: "I engineer robust backend systems with Django, DRF, FastAPI with primary focus on speed, security and scalability while integrating ML models into real-world applications..",
   location: "Mumbai, India",
   resumeUrl: {
     backend: "./data/resume_backend.pdf",
@@ -11,7 +11,7 @@ const heroData = {
     view: "View Resume",
     download: "Download Resume",
   },
-  enableQuotes: true,
+  enableQuotes: false,
   quotes: [
   `"Code is like humor. When you have to explain it, it’s bad."\n– Cory House`,
   `"First, solve the problem. Then, write the code."\n– John Johnson`,
