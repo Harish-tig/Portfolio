@@ -312,13 +312,6 @@ body.light .pr-image {
 .pr-link:hover svg { transform: rotate(-30deg) scale(1.15); }
 
 /* ── Modals ── */
-/* When modals are direct children of <body> they sit in the root stacking context.
-   The z-index:2000 is well above body > * { z-index:1 } (sections), navbar (z-index ~100),
-   and the noise texture (z-index:0). No !important needed — specificity is sufficient. */
-body > .modal-overlay {
-  z-index: 2000;
-}
-
 .modal-overlay {
   position: fixed;
   inset: 0;

@@ -135,14 +135,6 @@
       </div>
     `;
 
-    // ── Escape stacking context: body > * { position:relative; z-index:1 } makes
-    //    #hero a stacking context, so z-index on children is scoped to it.
-    //    Moving modals to <body> puts them in the root stacking context, above all sections.
-    ["resume-modal", "resume-view-modal"].forEach(function(id) {
-      var el = document.getElementById(id);
-      if (el) document.body.appendChild(el);
-    });
-
     setupModals();
     setupTyping();
     setupQuotes();
