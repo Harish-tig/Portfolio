@@ -4,7 +4,7 @@ const resumeBackendData = {
   contact: {
     email: "nadarharish03@gmail.com",
     github: "github.com/harish-tig",
-    linkedin: "linkedin.com/in/harish-tig",
+    linkedin: "linkedin.com/in/harish-nadar-tig",
     location: "Mumbai, India",
   },
   summary:
@@ -18,43 +18,66 @@ const resumeBackendData = {
   ],
   experience: [
     {
-      title: "Joint Technical Head",
-      org: "Student's Council, Mumbai University",
-      period: "2025 — Present",
+      title: "Flutter Developer Intern",
+      org: "10x Growth",
+      period: "Mar 2025 — June 2025",
       description:
-        "Lead technical initiatives for the college student council. Architected and maintained internal web tools, coordinating cross-functional teams across design and development.",
-      tags: ["Django", "REST API", "PostgreSQL"],
+        "Developed statefull and stateless web and mobile applications pages using Flutter and Dart.",
+      tags: ["Flutter", "Dart", "Supabase", "Git"],
+    },
+    {
+      title: "Backend Developer Intern",
+      org: "OnlineSavaari Private Limited",
+      period: "Mar 2026 — present",
+      description:
+        "Designed and implemented RESTful APIs for a ride-booking platform using Django REST Framework, efficient data models, and scalable architecture.",
+      tags: ["Django", "Django REST Framework", "PostgreSQL"],
     },
   ],
   projects: [
-    {
-      title: "Campus Connect API",
-      period: "2025",
-      description:
-        "Multi-tenant REST API serving college management features — timetables, announcements, and event registrations. Built with Django REST Framework and JWT-based auth.",
-      tags: ["Django REST Framework", "PostgreSQL", "JWT", "Redis"],
-    },
-    {
-      title: "SecureVault Backend",
-      period: "2024",
-      description:
-        "FastAPI microservice for encrypted credential storage with role-based access control, refresh token rotation, and audit logging.",
-      tags: ["FastAPI", "MongoDB", "JWT", "Python"],
-    },
-    {
-      title: "E-Commerce API",
-      period: "2024",
-      description:
-        "Full-featured e-commerce backend with product catalog, cart, orders, and Cloudinary-integrated media uploads. Deployed on a Linux VPS.",
-      tags: ["Django", "PostgreSQL", "Cloudinary", "REST API"],
-    },
+  {
+    title: "LocalSeva Backend",
+    period: "2026",
+    description:
+      "Django REST Framework backend for a multi-role service marketplace connecting users with providers. Implemented role-based access control, JWT authentication, booking workflows, and review systems with optimized PostgreSQL models and Cloudinary media handling.",
+    tags: ["Django REST Framework", "PostgreSQL", "JWT", "Cloudinary"],
+  },
+  {
+    title: "Invyta Event Management API",
+    period: "2025",
+    description:
+      "Flask-based REST API for event lifecycle management with secure JWT authentication, email OTP verification, and rate-limited endpoints. Built features like event creation, invite-based access, RSVP tracking, and personalized recommendations using MongoDB.",
+    tags: ["Flask", "MongoDB", "JWT", "REST API"],
+  },
+  {
+    title: "Rail Sahayati Backend",
+    period: "2025",
+    description:
+      "Backend system for AI-driven railway grievance management using Django and MongoDB. Integrated MobileNetV2-based image classification for automated complaint routing, reducing resolution time by 50% with role-based workflows and REST APIs.",
+    tags: ["Django", "MongoDB", "AI Integration", "REST API"],
+  },
   ],
   education: [
     {
       title: "B.E. in Artificial Intelligence & Machine Learning",
       org: "Mumbai University",
       period: "2022 — 2026",
-      description: "Final year student. Coursework includes Data Structures, DBMS, Operating Systems, Computer Networks, and Machine Learning.",
+      cgpa: "8.5/10",
+      description: "Final year student. Coursework includes Data Structures, DBMS, Operating Systems, Artificial Intelligence, and Machine Learning.",
+    },
+    {
+      title: "HSC (12th Grade)",
+      org: "Maharashtra State Board",
+      period: "2020— 2022",
+      cgpa: "57%",
+      description: "Completed Higher Secondary Certificate with a focus on Science stream, achieving 57% overall.",
+    },
+    {
+      title: "SSC (10th Grade)",
+      org: "Maharashtra State Board",
+      period: "2019 — 2020",
+      cgpa: "89%",
+      description: "Completed Secondary School Certificate with an 89% score, demonstrating strong academic performance in foundational subjects.",
     },
   ],
   certifications: [

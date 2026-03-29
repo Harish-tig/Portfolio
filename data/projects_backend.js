@@ -5,8 +5,8 @@ const backendProjects = [
     shortDesc: "Unified platform connecting users with local service providers.",
     image: "images/electrician.jpg",
     tech: ["Django", "DRF", "PostgreSQL", "JWT", "Cloudinary", "Redis"],
-    github: "https://github.com/harishnadar",
-    demo: "https://github.com/harishnadar",
+    github: "https://github.com/harish-tig",
+    demo: "https://localseva-kuak.onrender.com",
     date: "Jan 2026",
     details: {
       overview:

@@ -322,6 +322,7 @@
       <div class="resume-entry">
         <div class="resume-entry-title">${e.title}</div>
         <div class="resume-entry-period">${e.period}</div>
+        <div class="resume-entry-cgpa">${e.cgpa}</div>
         <div class="resume-entry-org">${e.org}</div>
         <p class="resume-entry-desc">${e.description}</p>
       </div>`).join("");
