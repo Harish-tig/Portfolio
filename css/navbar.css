@@ -202,3 +202,183 @@ body.light #theme-toggle::after {
     letter-spacing: 0.15em;
   }
 }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   Vertical Sidebar Navbar  (#vnav)
+   Rendered only when USE_VERTICAL_NAV = true in js/navbar.js.
+   The horizontal #navbar is hidden via JS (display:none) in that mode.
+   These rules have zero effect when USE_VERTICAL_NAV = false because
+   #vnav is never inserted into the DOM.
+══════════════════════════════════════════════════════════════════════════ */
+
+/* Shift page content right when sidebar is active */
+body.vnav-active {
+  padding-left: 64px;
+}
+
+#vnav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 64px;
+  height: 100vh;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--nav-bg);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-right: 1px solid var(--border);
+  padding: 1.5rem 0;
+  gap: 0;
+  /* Prevent it from creating a scrollbar on body */
+  overflow: visible;
+}
+
+/* Logo */
+.vnav-logo {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-decoration: none;
+  letter-spacing: -0.02em;
+  transition: color var(--transition-smooth);
+  flex-shrink: 0;
+  line-height: 1;
+  margin-bottom: 2rem;
+}
+
+.vnav-logo span { color: var(--accent); }
+
+.vnav-logo:hover { color: var(--accent); }
+
+/* Centre column of nav items */
+.vnav-items {
+  display: flex;
+  border-top: 0.1rem solid var(--accent);
+  border-bottom: 0.1rem solid var(--accent);
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  flex: 1;
+  justify-content: center;
+}
+
+/* Shared: each clickable row */
+.vnav-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--text-muted);
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition:
+    color       var(--transition-snappy),
+    background  var(--transition-snappy),
+    border-color var(--transition-snappy),
+    transform   var(--transition-snappy);
+  will-change: transform, color;
+  /* button reset */
+  font: inherit;
+  padding: 0;
+}
+
+.vnav-item:hover {
+  color: var(--text-primary);
+  background: var(--accent-light);
+  border-color: var(--border-accent);
+  transform: scale(1.08);
+}
+
+.vnav-item.active {
+  color: var(--accent);
+  background: var(--accent-light);
+  border-color: var(--border-accent);
+}
+
+/* Active left-edge indicator bar */
+.vnav-item.active::before {
+  content: "";
+  position: absolute;
+  left: -12px;   /* sits against the sidebar edge */
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 60%;
+  border-radius: 0 2px 2px 0;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent-glow);
+}
+
+/* Icon */
+.vnav-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.vnav-icon svg {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+}
+
+/* Tooltip (appears to the right on hover) */
+.vnav-tooltip {
+  position: absolute;
+  left: calc(100% + 12px);
+  top: 50%;
+  transform: translateY(-50%) translateX(-4px);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px;
+  border: 1px solid var(--border-hover);
+  box-shadow: var(--shadow-md);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity    0.18s var(--ease-out-expo),
+    transform  0.18s var(--ease-out-expo);
+  z-index: 1100;
+}
+
+.vnav-item:hover .vnav-tooltip {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+/* Bottom slot: theme toggle */
+.vnav-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  margin-top: 1.5rem;
+}
+
+/* Light mode tint */
+body.light #vnav {
+  border-right-color: var(--border);
+  box-shadow: 2px 0 12px rgba(0,0,0,0.06);
+}
+
+/* ── Responsive: hide vertical sidebar on small screens ─────────────────── */
+@media (max-width: 768px) {
+  body.vnav-active { padding-left: 0; }
+  #vnav { display: none; }
+}

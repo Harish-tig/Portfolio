@@ -163,6 +163,16 @@
       </div>
     `;
 
+    // ── Modal z-index fix ─────────────────────────────────────────────────────
+    // `body > * { position: relative; z-index: 1 }` (global.css) makes #projects
+    // a stacking context.  A position:fixed child is still confined to that
+    // context, so the modal renders behind later sibling sections.
+    // Fix: move the modal node to <body> so it sits in the root stacking context
+    // where its own z-index: 2000 applies without restriction.
+    const modalEl = document.getElementById("project-modal");
+    if (modalEl) document.body.appendChild(modalEl);
+    // ─────────────────────────────────────────────────────────────────────────
+
     document.querySelectorAll(".tab-btn").forEach(btn =>
       btn.addEventListener("click", () => switchTab(btn.dataset.tab))
     );
