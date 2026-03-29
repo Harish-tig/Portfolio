@@ -14,6 +14,23 @@
   align-items: start;
 }
 
+.exp-main {
+  position: relative;
+  padding-left: 2.5rem;
+}
+
+/* Vertical timeline bar */
+.exp-main::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.5rem;
+  bottom: 0.5rem;
+  width: 2px;
+  background: var(--border);
+  opacity: 0.5;
+}
+
 /* ── Group labels ── */
 .exp-group {
   display: flex;
@@ -63,10 +80,41 @@
   gap: 1.2rem;
   transition: all var(--transition-smooth);
   position: relative;
-  overflow: hidden;
+  overflow: visible; /* Changed from hidden to allow checkpoint dots to show */
   /* reveal */
   opacity: 0;
   transform: translateY(25px);
+}
+
+/* Checkpoint indicator */
+.exp-card::after {
+  content: "";
+  position: absolute;
+  left: -2.5rem;
+  top: 2.5rem;
+  width: 10px;
+  height: 10px;
+  background: var(--bg-primary);
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  transition: all var(--transition-smooth);
+}
+
+.exp-card:hover::after {
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--accent-glow);
+  transform: translateX(-50%) scale(1.3);
+}
+
+.exp-card--edu::after {
+  border-color: var(--text-dim);
+}
+
+.exp-card--edu:hover::after {
+  background: var(--text-dim);
+  box-shadow: none;
 }
 
 .exp-card::before {
@@ -79,6 +127,7 @@
   background: var(--accent);
   opacity: 0;
   transition: opacity 0.4s;
+  border-radius: 12px 0 0 12px;
 }
 
 .exp-card.is-visible {
@@ -355,6 +404,14 @@
   .exp-layout {
     grid-template-columns: 1fr;
     gap: 3rem;
+  }
+
+  .exp-main {
+    padding-left: 2rem;
+  }
+
+  .exp-card::after {
+    left: -2rem;
   }
 
   .certs-sticky-wrap {
