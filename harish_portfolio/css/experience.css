@@ -1,0 +1,421 @@
+/* ══════════════════════════════════════════
+   Experience Section
+══════════════════════════════════════════ */
+#experience {
+  background: var(--bg-primary);
+  border-top: 1px solid var(--border);
+}
+
+/* Two-column layout: main + sticky certs */
+.exp-layout {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 4rem;
+  align-items: start;
+}
+
+.exp-main {
+  position: relative;
+  padding-left: 2.5rem;
+}
+
+/* Vertical timeline bar */
+.exp-main::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.5rem;
+  bottom: 0.5rem;
+  width: 2px;
+  background: var(--border);
+  opacity: 0.5;
+}
+
+/* ── Group labels ── */
+.exp-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.exp-group:last-child {
+  margin-bottom: 0;
+}
+
+.exp-group-label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 0.5rem;
+}
+
+.exp-group-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+  box-shadow: 0 0 10px var(--accent-glow);
+}
+
+.exp-group-dot--edu {
+  background: var(--text-dim);
+  box-shadow: none;
+}
+
+/* ── Experience Card (Dev Panel Redesign) ── */
+.exp-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  transition: all var(--transition-smooth);
+  position: relative;
+  overflow: visible; /* Changed from hidden to allow checkpoint dots to show */
+  /* reveal */
+  opacity: 0;
+  transform: translateY(25px);
+}
+
+/* Checkpoint indicator */
+.exp-card::after {
+  content: "";
+  position: absolute;
+  left: -2.5rem;
+  top: 2.5rem;
+  width: 10px;
+  height: 10px;
+  background: var(--bg-primary);
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  transition: all var(--transition-smooth);
+}
+
+.exp-card:hover::after {
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--accent-glow);
+  transform: translateX(-50%) scale(1.3);
+}
+
+.exp-card--edu::after {
+  border-color: var(--text-dim);
+}
+
+.exp-card--edu:hover::after {
+  background: var(--text-dim);
+  box-shadow: none;
+}
+
+.exp-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--accent);
+  opacity: 0;
+  transition: opacity 0.4s;
+  border-radius: 12px 0 0 12px;
+}
+
+.exp-card.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.exp-card:hover {
+  border-color: var(--border-accent);
+  box-shadow: var(--shadow-premium);
+  transform: translateY(-6px) scale(1.01);
+}
+
+.exp-card:hover::before {
+  opacity: 1;
+}
+
+.exp-card--edu {
+  background: var(--bg-secondary);
+  border-style: dashed;
+}
+
+.exp-card--edu:hover {
+  border-style: solid;
+}
+
+.exp-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.exp-card-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.exp-card-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1.3;
+  transition: color var(--transition-smooth);
+}
+
+.exp-card:hover .exp-card-title {
+  color: var(--accent);
+}
+
+.exp-card-org {
+  font-size: 0.95rem;
+  color: var(--accent);
+  font-family: var(--font-body);
+  font-weight: 500;
+}
+
+.exp-card-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.4rem;
+  flex-shrink: 0;
+}
+
+.exp-card-period {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  background: var(--tag-bg);
+  border: 1px solid var(--border);
+  padding: 0.25rem 0.75rem;
+  border-radius: 6px;
+}
+
+.exp-card-location {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-dim);
+  letter-spacing: 0.04em;
+}
+
+.exp-card-desc {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+}
+
+.exp-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.exp-tag {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  background: var(--accent-light);
+  color: var(--accent);
+  border: 1px solid var(--border-accent);
+  letter-spacing: 0.03em;
+  transition: all 0.3s ease;
+}
+
+.exp-card:hover .exp-tag {
+  background: rgba(var(--accent-rgb), 0.15);
+  border-color: var(--accent);
+}
+
+/* ── Sticky Certifications Panel (System Card) ── */
+.certs-sticky-wrap {
+  position: sticky;
+  top: 110px;
+  align-self: start;
+  will-change: transform;
+}
+
+.certs-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all var(--transition-smooth);
+  box-shadow: var(--shadow-lg);
+  position: relative;
+}
+
+.certs-panel:hover {
+  border-color: var(--border-accent);
+  box-shadow: var(--shadow-premium);
+  transform: translateY(-5px);
+}
+
+.certs-panel-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(8px);
+}
+
+.certs-panel:hover .certs-panel-header {
+  background: var(--accent-light);
+  border-bottom-color: var(--border-accent);
+}
+
+.certs-panel-icon {
+  width: 32px;
+  height: 32px;
+  background: var(--accent-light);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid var(--border-accent);
+}
+
+.certs-panel-icon svg {
+  width: 16px;
+  height: 16px;
+  color: var(--accent);
+}
+
+.certs-panel-title {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.cert-list {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Cert Card ── */
+.cert-card {
+  position: relative;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  transition: all var(--transition-smooth);
+  cursor: default;
+  /* reveal */
+  opacity: 0;
+  transform: translateX(15px);
+}
+
+.cert-card.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.cert-card:last-child {
+  border-bottom: none;
+}
+
+.cert-card:hover {
+  background: rgba(var(--accent-rgb), 0.05);
+  padding-left: 1.75rem;
+}
+
+.cert-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--accent);
+  transform: scaleY(0);
+  transition: transform 0.4s var(--ease-out-expo);
+}
+
+.cert-card:hover::before {
+  transform: scaleY(1);
+}
+
+.cert-card-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.cert-card-title {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1.4;
+  transition: color var(--transition-smooth);
+}
+
+.cert-card:hover .cert-card-title {
+  color: var(--accent);
+}
+
+.cert-card-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cert-issuer {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  letter-spacing: 0.03em;
+}
+
+.cert-year {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--accent);
+  background: var(--accent-light);
+  border: 1px solid var(--border-accent);
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 960px) {
+  .exp-layout {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .exp-main {
+    padding-left: 2rem;
+  }
+
+  .exp-card::after {
+    left: -2rem;
+  }
+
+  .certs-sticky-wrap {
+    position: relative;
+    top: auto;
+  }
+}
