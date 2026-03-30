@@ -29,12 +29,21 @@
   top: 0;
   left: 0;
   height: 2px;
-  background: var(--accent);
   width: 0%;
+  background: var(--accent);
   z-index: 1001;
   transition: width 0.1s linear;
   box-shadow: 0 0 15px var(--accent-glow), 0 0 5px var(--accent);
-  will-change: width;
+  will-change: width, height;
+}
+
+/* Vertical mode — HARD override to prevent width bleed bug */
+body.vnav-active #scroll-progress {
+  top: 0;
+  left: 62px;
+  width: 2px !important;   /* critical fix */
+  height: 0%;
+  transition: height 0.1s linear;
 }
 
 .nav-logo {

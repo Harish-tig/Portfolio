@@ -800,3 +800,398 @@ body.light .resume-type-btn {
 body.light .hero-quote-item {
   color: var(--text-muted);
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   RESUME MODAL — Card-based layout
+   Added to fix: missing entry styles (raw text bug) + redesign
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Resume doc wrapper ── */
+.resume-doc {
+  padding: 2rem 2.5rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* ── Header card ── */
+.resume-header-card {
+  padding: 2rem 2.25rem 1.75rem;
+  border: 1px solid var(--border-accent);
+  border-radius: 14px;
+  background: linear-gradient(
+    135deg,
+    var(--bg-secondary) 0%,
+    var(--bg-card) 100%
+  );
+  margin-bottom: 0.25rem;
+}
+
+.resume-name {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.1;
+  margin-bottom: 0.35rem;
+}
+
+.resume-title-line {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--accent);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
+  font-weight: 600;
+}
+
+.resume-contact-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.75rem;
+}
+
+.resume-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  transition: color var(--transition);
+}
+.resume-contact-item:hover { color: var(--accent); }
+.resume-contact-item svg {
+  width: 13px;
+  height: 13px;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+/* ── Section card (wraps each resume section) ── */
+.resume-section-card {
+  padding: 1.5rem 2rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg-card);
+  transition: border-color 0.2s;
+}
+.resume-section-card:hover {
+  border-color: var(--border-accent);
+}
+body.light .resume-section-card {
+  background: var(--bg-primary);
+  box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+}
+
+/* ── Section title ── */
+.resume-section-title {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  font-weight: 600;
+}
+.resume-section-title::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--border-accent);
+  opacity: 0.35;
+}
+
+/* ── Summary ── */
+.resume-summary {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.85;
+  margin: 0;
+}
+
+/* ── Skills grid ── */
+.resume-skills-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+.resume-skill-row {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 0.75rem;
+  align-items: start;
+  font-size: 0.88rem;
+}
+.resume-skill-category {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  font-weight: 500;
+  padding-top: 0.15rem;
+  letter-spacing: 0.04em;
+}
+.resume-skill-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+.resume-skill-pill {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 0.2rem 0.55rem;
+  transition: all 0.15s;
+}
+.resume-skill-pill:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-light);
+}
+
+/* ── Entry cards (Experience & Education) ── */
+.resume-entries {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.resume-entry-card {
+  padding: 1.1rem 1.35rem;
+  border: 1px solid var(--border);
+  border-left: 2px solid var(--accent);
+  border-radius: 0 9px 9px 0;
+  background: var(--bg-secondary);
+  transition: border-color 0.2s, background 0.2s;
+}
+.resume-entry-card:hover {
+  border-color: var(--border-accent);
+  border-left-color: var(--accent);
+  background: var(--bg-card);
+}
+body.light .resume-entry-card {
+  background: var(--bg-primary);
+}
+
+/* Top row: title + period side by side */
+.resume-ec-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 0.45rem;
+  flex-wrap: wrap;
+}
+.resume-ec-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+.resume-ec-org {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--accent);
+  margin-top: 0.15rem;
+  letter-spacing: 0.03em;
+}
+.resume-ec-period {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-dim);
+  white-space: nowrap;
+  padding-top: 0.15rem;
+  letter-spacing: 0.04em;
+  flex-shrink: 0;
+}
+.resume-ec-grade {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--accent);
+  background: var(--accent-light);
+  border: 1px solid rgba(var(--accent-rgb), 0.2);
+  border-radius: 5px;
+  padding: 0.18rem 0.6rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+.resume-ec-desc {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin: 0.45rem 0 0.5rem;
+}
+
+/* Shared tag row */
+.resume-ec-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-top: 0.5rem;
+}
+.resume-ec-tag {
+  font-family: var(--font-mono);
+  font-size: 0.67rem;
+  color: var(--text-dim);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.15rem 0.5rem;
+  letter-spacing: 0.03em;
+  transition: all 0.15s;
+}
+.resume-ec-tag:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* ── Project sub-cards ── */
+.resume-proj-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.resume-proj-card {
+  padding: 1.1rem 1.35rem;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: var(--bg-secondary);
+  transition: border-color 0.2s, background 0.2s;
+}
+.resume-proj-card:hover {
+  border-color: var(--border-accent);
+  background: var(--bg-card);
+}
+body.light .resume-proj-card {
+  background: var(--bg-primary);
+}
+
+.resume-pc-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+}
+.resume-pc-title {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.resume-pc-period {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-dim);
+  white-space: nowrap;
+  letter-spacing: 0.04em;
+  flex-shrink: 0;
+}
+
+/* Bullet list inside project sub-card */
+.resume-pc-bullets {
+  margin: 0.55rem 0 0;
+  padding-left: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  list-style: none;
+}
+.resume-pc-bullets li {
+  font-size: 0.86rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  position: relative;
+  padding-left: 0.85rem;
+}
+.resume-pc-bullets li::before {
+  content: "›";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 600;
+  line-height: 1.65;
+}
+
+/* ── Certifications ── */
+.resume-certs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.resume-cert-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+.resume-cert-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.resume-cert-title {
+  font-size: 0.88rem;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+.resume-cert-meta {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+/* ── Empty state ── */
+.resume-empty {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  font-style: italic;
+  margin: 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  .resume-doc {
+    padding: 1.25rem 1rem 2rem;
+    gap: 0.85rem;
+  }
+  .resume-header-card,
+  .resume-section-card {
+    padding: 1.1rem 1.1rem;
+  }
+  .resume-skill-row {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+  }
+  .resume-ec-top,
+  .resume-pc-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+  .resume-ec-period,
+  .resume-pc-period {
+    font-size: 0.67rem;
+  }
+  .resume-cert-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.2rem;
+  }
+}

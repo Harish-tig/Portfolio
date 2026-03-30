@@ -31,7 +31,6 @@
     const firstName = nameParts[0];
     const lastName = nameParts.slice(1).join(" ");
 
-    // Build quotes HTML if enabled
     let quotesHTML = "";
     if (heroData.enableQuotes && heroData.quotes && heroData.quotes.length > 0) {
       quotesHTML = `
@@ -41,6 +40,7 @@
       `;
     }
 
+    // ── Hero section content (modals are NOT here — they are portal-mounted below) ──
     section.innerHTML = `
       <div class="hero-wrap">
         <div class="hero-left">
@@ -75,14 +75,9 @@
         <div class="hero-right">
           <div class="hero-photo-wrap">
             <div class="hero-photo-frame">
-              <img
-                src="${ProfileUrl}"
-                alt="Harish Nadar"
-              />
+              <img src="${ProfileUrl}" alt="Harish Nadar" />
             </div>
-            <!-- Decorative corner (bottom-left) -->
             <div class="hero-photo-accent-corner" aria-hidden="true"></div>
-            <!-- Status badge -->
             <div class="hero-status-badge" aria-hidden="true">
               <span class="hero-status-dot"></span>
               <span class="hero-status-text">Open to work · Mumbai</span>
@@ -90,26 +85,49 @@
           </div>
         </div>
       </div>
+    `;
 
-      <!-- Modal 1: Resume type selection -->
+    // ─────────────────────────────────────────────────────────────────────────
+    // PORTAL FIX — Root cause of the z-index bug:
+    //
+    //   body > * { position: relative; z-index: 1; }   ← global.css
+    //
+    // This rule gives #hero a stacking context (position + integer z-index).
+    // Any descendant — even one with position:fixed and z-index:2000 — is
+    // painted within that context and cannot visually escape it. Because
+    // #projects is a *sibling* of #hero with the same z-index but later in
+    // DOM order, the browser paints it on top of the entire #hero context,
+    // including the fixed modal.
+    //
+    // Fix: append modals directly to <body> so they form their own top-level
+    // stacking context, completely outside the conflicting ancestor.
+    // No arbitrarily high z-index is needed — 2000 (already set in projects.css)
+    // is sufficient once the parent stacking context is no longer in the way.
+    // ─────────────────────────────────────────────────────────────────────────
+    let existingPortal = document.getElementById("resume-modal-portal");
+    if (existingPortal) existingPortal.remove();
+
+    const portal = document.createElement("div");
+    portal.id = "resume-modal-portal";
+    portal.innerHTML = `
       <div id="resume-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="resume-modal-title">
         <div class="modal" style="max-width:460px">
           <div class="modal-header">
             <span class="modal-title" id="resume-modal-title">Select Resume</span>
-            <button class="modal-close" id="resume-modal-close" aria-label="Close">✕</button>
+            <button class="modal-close" id="resume-modal-close" aria-label="Close">&#x2715;</button>
           </div>
           <div class="resume-select-body">
             <button class="resume-type-btn" data-resume="backend">
               <span class="resume-type-label">
                 <span class="resume-type-title">Backend Developer</span>
-                <span class="resume-type-sub">Django · FastAPI · Flask · PostgreSQL</span>
+                <span class="resume-type-sub">Django &middot; FastAPI &middot; Flask &middot; PostgreSQL</span>
               </span>
               <span class="resume-type-arrow">${ICONS.chevron}</span>
             </button>
             <button class="resume-type-btn" data-resume="ml">
               <span class="resume-type-label">
                 <span class="resume-type-title">AI / ML Engineer</span>
-                <span class="resume-type-sub">TensorFlow · Keras · Scikit-learn · LSTM</span>
+                <span class="resume-type-sub">TensorFlow &middot; Keras &middot; Scikit-learn &middot; LSTM</span>
               </span>
               <span class="resume-type-arrow">${ICONS.chevron}</span>
             </button>
@@ -117,7 +135,6 @@
         </div>
       </div>
 
-      <!-- Modal 2: Resume viewer -->
       <div id="resume-view-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="resume-view-title">
         <div class="modal">
           <div class="modal-header">
@@ -126,14 +143,15 @@
               <a class="resume-view-dl-btn" id="resume-view-download" aria-label="Download PDF">
                 ${ICONS.download} Download PDF
               </a>
-              <button class="modal-close" id="resume-view-back" aria-label="Back" title="Back" style="font-size:0.9rem;opacity:0.7">← Back</button>
-              <button class="modal-close" id="resume-view-close" aria-label="Close">✕</button>
+              <button class="modal-close" id="resume-view-back" aria-label="Back" title="Back" style="font-size:0.9rem;opacity:0.7">&#x2190; Back</button>
+              <button class="modal-close" id="resume-view-close" aria-label="Close">&#x2715;</button>
             </div>
           </div>
           <div id="resume-doc-container" class="modal-body" style="padding:0"></div>
         </div>
       </div>
     `;
+    document.body.appendChild(portal);
 
     setupModals();
     setupTyping();
@@ -142,65 +160,37 @@
     setupScrollProgress();
   }
 
-  // ── Quote Rotator ──
   function setupQuotes() {
     const container = document.getElementById("hero-quotes");
     if (!container || !heroData.enableQuotes) return;
-
     const items = container.querySelectorAll(".hero-quote-item");
     if (items.length <= 1) return;
-
     let currentIdx = 0;
-    const duration = 3000; // 3 seconds per quote
-
+    const duration = 3000;
     setInterval(() => {
       const current = items[currentIdx];
       current.classList.remove("active");
       current.classList.add("exit");
-
       currentIdx = (currentIdx + 1) % items.length;
       const next = items[currentIdx];
-
       setTimeout(() => {
         current.classList.remove("exit");
         next.classList.add("active");
-      }, 600); // Wait for exit animation to finish
+      }, 600);
     }, duration);
   }
 
-  // ── Typing effect — bold, high-contrast ──
   function setupTyping() {
     const el = document.getElementById("hero-typed");
     if (!el) return;
-
-    const roles = [
-      "Backend Engineer",
-      "Machine Learning Engineer",
-      "API Architect",
-    ];
-
-    let roleIdx = 0;
-    let charIdx = 0;
-    let deleting = false;
-    let paused = false;
-
-    const SPEED_TYPE = 60;
-    const SPEED_DELETE = 30;
-    const PAUSE_END = 2200;
-    const PAUSE_START = 350;
-
-    function getTypingSpeed() {
-      return Math.max(28, SPEED_TYPE + (Math.random() * 30 - 15));
-    }
-
-    function getDeletingSpeed() {
-      return Math.max(22, SPEED_DELETE + (Math.random() * 12 - 6));
-    }
-
+    const roles = ["Backend Engineer", "Machine Learning Engineer", "API Architect"];
+    let roleIdx = 0, charIdx = 0, deleting = false, paused = false;
+    const SPEED_TYPE = 60, SPEED_DELETE = 30, PAUSE_END = 2200, PAUSE_START = 350;
+    function getTypingSpeed() { return Math.max(28, SPEED_TYPE + (Math.random() * 30 - 15)); }
+    function getDeletingSpeed() { return Math.max(22, SPEED_DELETE + (Math.random() * 12 - 6)); }
     function tick() {
       if (paused) return;
       const current = roles[roleIdx];
-
       if (!deleting) {
         charIdx++;
         el.textContent = current.slice(0, charIdx);
@@ -223,36 +213,29 @@
         setTimeout(tick, getDeletingSpeed());
       }
     }
-
     setTimeout(tick, 900);
   }
 
-  // ── Resume modal logic ──
   function setupModals() {
     const selectModal = document.getElementById("resume-modal");
-    const viewModal = document.getElementById("resume-view-modal");
-    const viewTitle = document.getElementById("resume-view-title");
+    const viewModal   = document.getElementById("resume-view-modal");
+    const viewTitle   = document.getElementById("resume-view-title");
     const docContainer = document.getElementById("resume-doc-container");
-    const dlBtn = document.getElementById("resume-view-download");
+    const dlBtn       = document.getElementById("resume-view-download");
 
-    let currentType = "backend";
-
-    function lockScroll() { document.body.classList.add("modal-open"); }
+    function lockScroll()   { document.body.classList.add("modal-open"); }
     function unlockScroll() { document.body.classList.remove("modal-open"); }
+    function openSelect()   { selectModal.classList.add("open"); lockScroll(); }
+    function closeSelect()  { selectModal.classList.remove("open"); unlockScroll(); }
 
-    function openSelect() { selectModal.classList.add("open"); lockScroll(); }
-    function closeSelect() { selectModal.classList.remove("open"); unlockScroll(); }
     function openView(type) {
-      currentType = type;
       closeSelect();
       lockScroll();
       const data = type === "backend"
         ? (typeof resumeBackendData !== "undefined" ? resumeBackendData : null)
-        : (typeof resumeMLData !== "undefined" ? resumeMLData : null);
-
+        : (typeof resumeMLData     !== "undefined" ? resumeMLData     : null);
       if (!data) return;
       viewTitle.textContent = data.label;
-      // Update PDF download link
       if (dlBtn) {
         dlBtn.href = RESUME_PATHS[type];
         dlBtn.setAttribute("download", `harish-nadar-${type}-resume.pdf`);
@@ -260,138 +243,170 @@
       docContainer.innerHTML = buildResumeDoc(data);
       viewModal.classList.add("open");
     }
+
     function closeView() { viewModal.classList.remove("open"); unlockScroll(); }
 
-    const viewResumeBtn = document.getElementById("view-resume-btn");
-    if (viewResumeBtn) viewResumeBtn.addEventListener("click", openSelect);
-    
+    const viewResumeBtn   = document.getElementById("view-resume-btn");
     const resumeModalClose = document.getElementById("resume-modal-close");
+    const resumeViewClose  = document.getElementById("resume-view-close");
+    const resumeViewBack   = document.getElementById("resume-view-back");
+
+    if (viewResumeBtn)    viewResumeBtn.addEventListener("click", openSelect);
     if (resumeModalClose) resumeModalClose.addEventListener("click", closeSelect);
-    
+    if (resumeViewClose)  resumeViewClose.addEventListener("click", closeView);
+    if (resumeViewBack)   resumeViewBack.addEventListener("click", () => { closeView(); setTimeout(openSelect, 120); });
+
     if (selectModal) {
       selectModal.addEventListener("click", (e) => { if (e.target === e.currentTarget) closeSelect(); });
       selectModal.querySelectorAll(".resume-type-btn").forEach(btn => {
         btn.addEventListener("click", () => openView(btn.dataset.resume));
       });
     }
-
-    const resumeViewClose = document.getElementById("resume-view-close");
-    if (resumeViewClose) resumeViewClose.addEventListener("click", closeView);
-    
-    const resumeViewBack = document.getElementById("resume-view-back");
-    if (resumeViewBack) resumeViewBack.addEventListener("click", () => {
-      closeView();
-      setTimeout(openSelect, 120);
-    });
-    
     if (viewModal) viewModal.addEventListener("click", (e) => { if (e.target === e.currentTarget) closeView(); });
 
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") { closeView(); closeSelect(); }
-    });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") { closeView(); closeSelect(); } });
   }
 
-  // ── Resume document builder ──
+  // ── Label raw grade values contextually ──
+  // "8.5/10" → "CGPA: 8.5/10"   "57%" → "Score: 57%"
+  function formatGrade(raw) {
+    if (!raw) return null;
+    const s = String(raw).trim();
+    if (!s) return null;
+    if (/^(cgpa|score|grade|gpa|percentage):/i.test(s)) return s; // already labelled
+    if (s.includes("%")) return "Score: " + s;
+    return "CGPA: " + s;
+  }
+
+  // Split a description into up to `max` bullet sentences
+  function descToBullets(desc, max) {
+    max = max || 2;
+    if (!desc) return [];
+    var raw = desc.split(/\.\s+/).filter(Boolean);
+    var sentences = raw.map(function(s, i) { return i < raw.length - 1 ? s + "." : s; });
+    return sentences.slice(0, max);
+  }
+
+  // ── Resume document builder — card-based modern layout ──
   function buildResumeDoc(d) {
-    const skillsHTML = d.skills.map(s => `
-      <div class="resume-skill-row">
-        <span class="resume-skill-category">${s.category}</span>
-        <div class="resume-skill-pills">
-          ${s.items.map(i => `<span class="resume-skill-pill">${i}</span>`).join("")}
-        </div>
-      </div>`).join("");
+    var name = typeof heroData !== "undefined" ? heroData.name : "Harish Nadar";
 
-    const expHTML = d.experience.map(e => `
-      <div class="resume-entry">
-        <div class="resume-entry-title">${e.title}</div>
-        <div class="resume-entry-period">${e.period}</div>
-        <div class="resume-entry-org">${e.org}</div>
-        <p class="resume-entry-desc">${e.description}</p>
-        ${e.tags ? `<div class="resume-entry-tags">${e.tags.map(t => `<span class="resume-entry-tag">${t}</span>`).join("")}</div>` : ""}
-      </div>`).join("");
+    var skillsHTML = d.skills.map(function(s) {
+      return '<div class="resume-skill-row">' +
+        '<span class="resume-skill-category">' + s.category + '</span>' +
+        '<div class="resume-skill-pills">' +
+          s.items.map(function(i) { return '<span class="resume-skill-pill">' + i + '</span>'; }).join("") +
+        '</div>' +
+        '</div>';
+    }).join("");
 
-    const projHTML = d.projects.map(p => `
-      <div class="resume-entry">
-        <div class="resume-entry-title">${p.title}</div>
-        <div class="resume-entry-period">${p.period}</div>
-        <p class="resume-entry-desc">${p.description}</p>
-        ${p.tags ? `<div class="resume-entry-tags">${p.tags.map(t => `<span class="resume-entry-tag">${t}</span>`).join("")}</div>` : ""}
-      </div>`).join("");
+    var expHTML = d.experience && d.experience.length
+      ? d.experience.map(function(e) {
+          return '<div class="resume-entry-card">' +
+            '<div class="resume-ec-top">' +
+              '<div>' +
+                '<div class="resume-ec-title">' + e.title + '</div>' +
+                '<div class="resume-ec-org">' + e.org + '</div>' +
+              '</div>' +
+              '<span class="resume-ec-period">' + e.period + '</span>' +
+            '</div>' +
+            '<p class="resume-ec-desc">' + e.description + '</p>' +
+            (e.tags ? '<div class="resume-ec-tags">' + e.tags.map(function(t) { return '<span class="resume-ec-tag">' + t + '</span>'; }).join("") + '</div>' : '') +
+          '</div>';
+        }).join("")
+      : '<p class="resume-empty">No experience listed.</p>';
 
-    const eduHTML = d.education.map(e => `
-      <div class="resume-entry">
-        <div class="resume-entry-title">${e.title}</div>
-        <div class="resume-entry-period">${e.period}</div>
-        <div class="resume-entry-cgpa">${e.cgpa}</div>
-        <div class="resume-entry-org">${e.org}</div>
-        <p class="resume-entry-desc">${e.description}</p>
-      </div>`).join("");
+    var projHTML = d.projects && d.projects.length
+      ? d.projects.map(function(p) {
+          var bullets = descToBullets(p.description, 2);
+          return '<div class="resume-proj-card">' +
+            '<div class="resume-pc-top">' +
+              '<div class="resume-pc-title">' + p.title + '</div>' +
+              '<span class="resume-pc-period">' + p.period + '</span>' +
+            '</div>' +
+            (p.tags ? '<div class="resume-ec-tags">' + p.tags.map(function(t) { return '<span class="resume-ec-tag">' + t + '</span>'; }).join("") + '</div>' : '') +
+            '<ul class="resume-pc-bullets">' +
+              bullets.map(function(b) { return '<li>' + b + '</li>'; }).join("") +
+            '</ul>' +
+          '</div>';
+        }).join("")
+      : '<p class="resume-empty">No projects listed.</p>';
 
-    const certHTML = d.certifications.map(c => `
-      <div class="resume-cert-item">
-        <span class="resume-cert-title">${c.title}</span>
-        <span class="resume-cert-meta">${c.issuer} · ${c.year}</span>
-      </div>`).join("");
+    var eduHTML = d.education && d.education.length
+      ? d.education.map(function(e) {
+          var gradeLabel = formatGrade(e.cgpa);
+          return '<div class="resume-entry-card">' +
+            '<div class="resume-ec-top">' +
+              '<div>' +
+                '<div class="resume-ec-title">' + e.title + '</div>' +
+                '<div class="resume-ec-org">' + e.org + '</div>' +
+              '</div>' +
+              '<span class="resume-ec-period">' + e.period + '</span>' +
+            '</div>' +
+            (gradeLabel ? '<div class="resume-ec-grade">' + gradeLabel + '</div>' : '') +
+            '<p class="resume-ec-desc">' + e.description + '</p>' +
+          '</div>';
+        }).join("")
+      : '<p class="resume-empty">No education listed.</p>';
 
-    const name = typeof heroData !== "undefined" ? heroData.name : "Harish Nadar";
+    var certHTML = d.certifications.map(function(c) {
+      return '<div class="resume-cert-item">' +
+        '<span class="resume-cert-title">' + c.title + '</span>' +
+        '<span class="resume-cert-meta">' + c.issuer + ' &middot; ' + c.year + '</span>' +
+      '</div>';
+    }).join("");
 
-    return `
-      <div class="resume-doc">
-        <div class="resume-header">
-          <div class="resume-name">${name}</div>
-          <div class="resume-title-line">${d.label.replace(" Resume", "")}</div>
-          <div class="resume-contact-row">
-            <a class="resume-contact-item" href="mailto:${d.contact.email}">${ICONS_SM.email} ${d.contact.email}</a>
-            <a class="resume-contact-item" href="https://github.com/${d.contact.github.split('/').pop()}" target="_blank" rel="noopener">${ICONS_SM.github} ${d.contact.github}</a>
-            <a class="resume-contact-item" href="https://${d.contact.linkedin}" target="_blank" rel="noopener">${ICONS_SM.link} ${d.contact.linkedin}</a>
-            <span class="resume-contact-item">${ICONS_SM.loc} ${d.contact.location}</span>
-          </div>
-        </div>
+    return '<div class="resume-doc">' +
 
-        <div class="resume-section">
-          <div class="resume-section-title">Summary</div>
-          <p class="resume-summary">${d.summary}</p>
-        </div>
+      '<div class="resume-header-card">' +
+        '<div class="resume-name">' + name + '</div>' +
+        '<div class="resume-title-line">' + d.label.replace(" Resume", "") + '</div>' +
+        '<div class="resume-contact-row">' +
+          '<a class="resume-contact-item" href="mailto:' + d.contact.email + '">' + ICONS_SM.email + ' ' + d.contact.email + '</a>' +
+          '<a class="resume-contact-item" href="https://github.com/' + d.contact.github.split('/').pop() + '" target="_blank" rel="noopener">' + ICONS_SM.github + ' ' + d.contact.github + '</a>' +
+          '<a class="resume-contact-item" href="https://' + d.contact.linkedin + '" target="_blank" rel="noopener">' + ICONS_SM.link + ' ' + d.contact.linkedin + '</a>' +
+          '<span class="resume-contact-item">' + ICONS_SM.loc + ' ' + d.contact.location + '</span>' +
+        '</div>' +
+      '</div>' +
 
-        <div class="resume-section">
-          <div class="resume-section-title">Skills</div>
-          <div class="resume-skills-grid">${skillsHTML}</div>
-        </div>
+      '<div class="resume-section-card">' +
+        '<div class="resume-section-title">Summary</div>' +
+        '<p class="resume-summary">' + d.summary + '</p>' +
+      '</div>' +
 
-        <div class="resume-section">
-          <div class="resume-section-title">Experience</div>
-          <div class="resume-entries">${expHTML}</div>
-        </div>
+      '<div class="resume-section-card">' +
+        '<div class="resume-section-title">Skills</div>' +
+        '<div class="resume-skills-grid">' + skillsHTML + '</div>' +
+      '</div>' +
 
-        <div class="resume-section">
-          <div class="resume-section-title">Projects</div>
-          <div class="resume-entries">${projHTML}</div>
-        </div>
+      '<div class="resume-section-card">' +
+        '<div class="resume-section-title">Experience</div>' +
+        '<div class="resume-entries">' + expHTML + '</div>' +
+      '</div>' +
 
-        <div class="resume-section">
-          <div class="resume-section-title">Education</div>
-          <div class="resume-entries">${eduHTML}</div>
-        </div>
+      '<div class="resume-section-card">' +
+        '<div class="resume-section-title">Projects</div>' +
+        '<div class="resume-proj-grid">' + projHTML + '</div>' +
+      '</div>' +
 
-        <div class="resume-section">
-          <div class="resume-section-title">Certifications</div>
-          <div class="resume-certs">${certHTML}</div>
-        </div>
-      </div>
-    `;
+      '<div class="resume-section-card">' +
+        '<div class="resume-section-title">Education</div>' +
+        '<div class="resume-entries">' + eduHTML + '</div>' +
+      '</div>' +
+
+      '<div class="resume-section-card">' +
+        '<div class="resume-section-title">Certifications</div>' +
+        '<div class="resume-certs">' + certHTML + '</div>' +
+      '</div>' +
+
+    '</div>';
   }
 
-  // ── Smooth scroll parallax on photo (moves with scroll, no static behavior) ──
   function setupScrollParallax() {
     const heroSection = document.getElementById("hero");
     const heroRight = document.querySelector(".hero-right");
     if (!heroSection || !heroRight) return;
-
-    let ticking = false;
-    let mouseX = 0, mouseY = 0;
-    let scrollY = 0;
-
-    // Mouse parallax
+    let ticking = false, mouseX = 0, mouseY = 0, scrollY = 0;
     document.addEventListener("mousemove", (e) => {
       if (!isInViewport(heroSection)) return;
       const rect = heroSection.getBoundingClientRect();
@@ -399,38 +414,19 @@
       mouseY = ((e.clientY - rect.top) / rect.height - 0.5) * 10;
       requestUpdate();
     });
-
-    document.addEventListener("mouseleave", () => {
-      mouseX = 0; mouseY = 0;
-      requestUpdate();
-    });
-
-    // Scroll parallax — smooth movement as user scrolls past hero
-    window.addEventListener("scroll", () => {
-      scrollY = window.scrollY;
-      requestUpdate();
-    }, { passive: true });
-
-    function requestUpdate() {
-      if (!ticking) {
-        requestAnimationFrame(applyTransform);
-        ticking = true;
-      }
-    }
-
+    document.addEventListener("mouseleave", () => { mouseX = 0; mouseY = 0; requestUpdate(); });
+    window.addEventListener("scroll", () => { scrollY = window.scrollY; requestUpdate(); }, { passive: true });
+    function requestUpdate() { if (!ticking) { requestAnimationFrame(applyTransform); ticking = true; } }
     function applyTransform() {
       ticking = false;
       if (!isInViewport(heroSection)) return;
-      const parallaxY = scrollY * 0.12; // subtle vertical drift on scroll
-      heroRight.style.transform = `translate(${mouseX}px, ${mouseY - parallaxY}px)`;
+      heroRight.style.transform = `translate(${mouseX}px, ${mouseY - scrollY * 0.12}px)`;
     }
   }
 
-  // ── Scroll progress bar ──
   function setupScrollProgress() {
     const bar = document.getElementById("scroll-progress");
     if (!bar) return;
-
     window.addEventListener("scroll", () => {
       const scrollTop = window.scrollY;
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;

@@ -11,7 +11,7 @@ const heroData = {
     view: "View Resume",
     download: "Download Resume",
   },
-  enableQuotes: false,
+  enableQuotes: false, // toggle this to show/hide quotes section
   quotes: [
   `"Code is like humor. When you have to explain it, it’s bad."\n– Cory House`,
   `"First, solve the problem. Then, write the code."\n– John Johnson`,
