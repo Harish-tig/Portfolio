@@ -16,7 +16,7 @@
           <div class="education-institution">${edu.institution}</div>
           <div class="education-meta">
             <span class="education-period">${edu.period}</span>
-            <span class="education-detail">${edu.detail}</span>
+            ${edu.detail ? `<span class="education-detail">${edu.detail}</span>` : ""}
           </div>
         </div>
       </div>

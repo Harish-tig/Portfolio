@@ -10,14 +10,14 @@ const educationData = [
     degree: "HSC — Science (PCMB)",
     institution: "Maharashtra State Board",
     period: "2020 – 2022",
-    detail: "57%",
+    // detail: "57%",
     icon: "cert",
   },
   {
     degree: "SSC",
     institution: "Maharashtra State Board",
     period: "2019 – 2020",
-    detail: "89%",
+    // detail: "89%",
     icon: "cert",
   },
 ];
