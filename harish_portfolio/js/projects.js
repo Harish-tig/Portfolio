@@ -54,6 +54,7 @@
         <div class="pr-links">
           ${p.demo ? `<a class="pr-link" href="${p.demo}" target="_blank" rel="noopener" onclick="event.stopPropagation()">${ICONS.link} Live Demo ${ICONS.arrow}</a>` : ""}
           <a class="pr-link" href="${p.github}" target="_blank" rel="noopener" onclick="event.stopPropagation()">${ICONS.github} See on GitHub ${ICONS.arrow}</a>
+          ${p.apidocs ? `<a class="pr-link" href="${p.apidocs}" target="_blank" rel="noopener" onclick="event.stopPropagation()">${ICONS.link} API Docs ${ICONS.arrow}</a>` : ""}
         </div>
       </div>
     `;

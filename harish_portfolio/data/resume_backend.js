@@ -14,7 +14,7 @@ const resumeBackendData = {
     { category: "Databases",   items: ["PostgreSQL", "MongoDB", "Redis", "SQL"] },
     { category: "Auth & APIs", items: ["JWT Auth", "REST API Design", "OAuth2"] },
     { category: "Languages",   items: ["Python", "JavaScript"] },
-    { category: "Tools",       items: ["Git", "GitHub", "Postman", "Cloudinary", "Linux"] },
+    { category: "Tools",       items: ["Git", "GitHub", "Postman", "Linux", "Render"] },
   ],
   experience: [
     {

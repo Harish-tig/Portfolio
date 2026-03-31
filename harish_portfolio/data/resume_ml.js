@@ -10,45 +10,53 @@ const resumeMLData = {
   summary:
     "Final year B.E. student in AI & ML at Mumbai University (2026) with end-to-end experience across the ML lifecycle — data preprocessing, model architecture, training, evaluation, and deployment. Built production-ready models across computer vision, NLP, and time series domains.",
   skills: [
-    { category: "Frameworks",  items: ["TensorFlow", "Keras", "Scikit-learn", "PyTorch (basics)"] },
+    { category: "Frameworks",  items: ["TensorFlow", "Keras", "Scikit-learn", "PyTorch"] },
     { category: "Techniques",  items: ["CNN", "LSTM", "Transfer Learning", "Time Series", "Feature Engineering"] },
     { category: "Data",        items: ["NumPy", "Pandas", "Matplotlib", "Seaborn", "Data Preprocessing"] },
-    { category: "Languages",   items: ["Python", "JavaScript"] },
-    { category: "Deployment",  items: ["FastAPI", "Flask", "REST API", "Cloudinary"] },
+    { category: "Languages",   items: ["Python"] },
+    { category: "Deployment",  items: ["FastAPI", "Flask", "REST API", "Render"] },
     { category: "Tools",       items: ["Git", "GitHub", "Postman", "Linux", "Jupyter"] },
   ],
   experience: [
     {
-      title: "Joint Technical Head",
-      org: "Student's Council, Mumbai University",
-      period: "2025 — Present",
+      title: "Flutter Developer Intern",
+      org: "10x Growth",
+      period: "Mar 2025 — June 2025",
       description:
-        "Drove ML-powered feature development for internal student tools, including recommendation and scheduling automation.",
-      tags: ["Python", "ML", "Data Analysis"],
+        "Developed statefull and stateless web and mobile applications pages using Flutter and Dart.",
+      tags: ["Flutter", "Dart", "Supabase", "Git"],
+    },
+    {
+      title: "Backend Developer Intern",
+      org: "OnlineSavaari Private Limited",
+      period: "Mar 2026 — present",
+      description:
+        "Designed and implemented RESTful APIs for a ride-booking platform using Django REST Framework, efficient data models, and scalable architecture.",
+      tags: ["Django", "Django REST Framework", "PostgreSQL"],
     },
   ],
   projects: [
     {
-      title: "Crop Disease Detection",
+      title: "Predictive Maintenance Model for Industrial Machinery",
+      period: "2026",
+      description:
+        "CNN-LSTM model for Remaining Useful Life prediction on sensor data.",
+      tags: ["TensorFlow", "Keras", "CNN", "LSTM", "Time Series"],
+    },
+    {
+      title: "ML model for plant disease classification",
       period: "2025",
       description:
-        "CNN-based image classification model for identifying plant diseases from leaf photographs. Achieved 94% validation accuracy using transfer learning on a ResNet backbone.",
-      tags: ["TensorFlow", "Keras", "CNN", "Transfer Learning"],
+        "Built a CNN-based image classifier to identify and categorize plant diseases from leaf images, practically immpletemented using ESP32-CAM and flask for real-time inference in agricultural settings.",
+      tags: ["Python", "CNN", "Image Classification", "Scikit-learn"],
     },
     {
-      title: "Stock Price Predictor",
+      title: "Rail Sahayati — ML Module",
       period: "2024",
       description:
-        "LSTM time series model trained on 5 years of NIFTY 50 data. Included sliding window preprocessing, early stopping, and a FastAPI inference endpoint.",
-      tags: ["LSTM", "Keras", "Pandas", "FastAPI"],
-    },
-    {
-      title: "SIH Game-Based Learning Platform",
-      period: "2024",
-      description:
-        "Smart India Hackathon Finalist. Contributed ML components for adaptive difficulty and learner performance prediction using Scikit-learn classifiers.",
-      tags: ["Scikit-learn", "Python", "Data Preprocessing"],
-    },
+        "ML component of the Rail Sahayati grievance platform — a MobileNetV2-based image classifier that auto-categorizes complaint images and routes them to the right department.",
+      tags: ["Scikit-learn", "Python", "Data Preprocessing","MobileNetV2", "Transfer Learning"],
+    }
   ],
   education: [
     {

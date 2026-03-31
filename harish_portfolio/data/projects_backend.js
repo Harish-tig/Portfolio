@@ -6,7 +6,8 @@ const backendProjects = [
     image: "images/electrician.jpg",
     tech: ["Django", "DRF", "PostgreSQL", "JWT", "Cloudinary", "Redis"],
     github: "https://github.com/harish-tig",
-    demo: "https://localseva-kuak.onrender.com",
+    apidocs: "https://localseva-1apidocs.onrender.com",
+    demo: "https://localseva-front-end.onrender.com/home",
     date: "Jan 2026",
     details: {
       overview:
@@ -26,8 +27,9 @@ const backendProjects = [
     shortDesc: "Flask-based REST backend for event lifecycle and invite management.",
     image: "images/events.jpg",
     tech: ["Flask", "MongoDB", "JWT", "OTP Auth", "Rate Limiting"],
-    github: "https://github.com/harishnadar",
+    github: "https://github.com/Harish-tig/INVYTA-EVENT-MANAGING-PLATFORM",
     demo: null,
+    apidocs: null,
     date: "Feb 2025",
     details: {
       overview:
@@ -47,8 +49,9 @@ const backendProjects = [
     shortDesc: "AI-driven railway grievance system backend with role-based routing.",
     image: "images/VB.jpg",
     tech: ["Django", "MongoDB", "REST API", "MobileNetV2", "Role-based Auth"],
-    github: "https://github.com/harishnadar",
+    github: "https://github.com/Harish-tig/Rail_Madad",
     demo: null,
+    apidocs: null,
     date: "Jan 2025",
     details: {
       overview:

@@ -5,8 +5,9 @@ const mlProjects = [
     shortDesc: "CNN-LSTM model for Remaining Useful Life prediction on sensor data.",
     image: "images/rot_mot.jpg",
     tech: ["TensorFlow", "Keras", "CNN-LSTM", "Time Series", "NumPy", "Pandas"],
-    github: "https://github.com/harishnadar",
+    github: "https://github.com/Harish-tig/Predictive-Maintenance-Dahsboard",
     demo: null,
+    apidocs: null,
     date: "Jan 2026",
     details: {
       overview:
@@ -26,8 +27,9 @@ const mlProjects = [
     shortDesc: "MobileNetV2 image classifier for automatic grievance categorization.",
     image: "images/VB.jpg",
     tech: ["MobileNetV2", "TensorFlow", "Image Classification", "Transfer Learning"],
-    github: "https://github.com/harishnadar",
+    github: "https://github.com/Harish-tig/Rail_Madad",
     demo: null,
+    apidocs: null,
     date: "Jan 2025",
     details: {
       overview:
