@@ -1,5 +1,5 @@
 const heroData = {
-  name: "Harish Nadar",
+  name: "ShivaMalar Nadar",
   title: "Backend Developer & AI/ML Engineer",
   tagline: "I engineer robust backend systems with Django, DRF, FastAPI with primary focus on speed, security and scalability while integrating ML models into real-world applications.",
   location: "Mumbai, India",
