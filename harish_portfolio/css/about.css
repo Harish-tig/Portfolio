@@ -54,8 +54,6 @@
   position: sticky;
   top: 110px;
   align-self: start;
-  max-height: calc(100vh - 140px);
-  overflow-y: auto;
 }
 
 @media (max-width: 900px) {
@@ -1050,6 +1048,8 @@ body.light .sticky-note {
   flex-direction: column;
   gap: 0;
   padding: 0.4rem 0;
+  max-height: 300px;
+  overflow-y: auto;
 }
 
 .apc-item {

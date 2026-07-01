@@ -29,6 +29,7 @@ const experienceData = {
     { title: "SQL BootCamp", issuer:"Udemy", year:"2026"},
     { title: "Python for AIML", issuer: "SAP Edunet Foundation", year: "2024" },
     { title: "Advanced Python Course", issuer: "Udemy", year: "2023" },
+    
   ],
 
   /* ── Competitive Achievements ── */
@@ -90,7 +91,8 @@ const experienceData = {
       period: "2023 — 2024",
       description:
         "Oversaw documentation and reporting for the college's National Service Scheme unit. Ensured accurate record-keeping of activities and events.",
-    }
+    },
+    
     
   ],
 };

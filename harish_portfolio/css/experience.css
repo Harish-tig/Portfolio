@@ -243,8 +243,6 @@
   top: 110px;
   align-self: start;
   will-change: transform;
-  max-height: calc(100vh - 140px);
-  overflow-y: auto;
 }
 
 .certs-panel {
@@ -308,6 +306,8 @@
 .cert-list {
   display: flex;
   flex-direction: column;
+  max-height: 400px;
+  overflow-y: auto;
 }
 
 /* ── Cert Card ── */
@@ -335,7 +335,6 @@
   background: var(--bg-secondary);
   border-color: var(--border-accent);
   box-shadow: var(--shadow-premium);
-  transform: translateY(-4px);
   z-index: 1;
   border-radius: 8px;
 }

@@ -31,5 +31,7 @@ const aboutData = {
       meta: "Intra-College · 2025",
       tag: "Runner-up",
     },
+    
+    
   ]
 };
