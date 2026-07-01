@@ -103,7 +103,6 @@
 
     document.getElementById("project-modal-title").textContent = p.title;
     document.getElementById("project-modal-body").innerHTML = `
-      <img class="modal-image" src="${p.image}" alt="${p.title}" />
       <p class="modal-overview">${p.details.overview}</p>
       <div class="modal-highlights-label">Key Highlights</div>
       <ul class="modal-highlights">

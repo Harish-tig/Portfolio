@@ -300,8 +300,6 @@ body.light .hero-role-text {
   align-items: center;
   opacity: 0;
   animation: fadeIn 1.5s var(--ease-out-expo) 0.6s forwards;
-  /* smooth scroll parallax handled via JS — needs will-change */
-  will-change: transform;
 }
 
 /* Outer container with layered feel */
@@ -485,17 +483,20 @@ body.light .hero-photo-frame {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 1.2s var(--ease-out-expo), filter 0.8s;
-  filter: grayscale(0.15) contrast(1.02);
+  transition: transform 0.3s ease;
   display: block;
 }
 
 .hero-photo-wrap:hover .hero-photo-frame img {
   transform: scale(1.04);
-  filter: grayscale(0) contrast(1.04);
 }
 
-.hero-location { display: none; }
+@media (max-width: 900px) {
+  .hero-photo-wrap:hover .hero-photo-frame img {
+    transform: none;
+  }
+}
+
 
 /* ── Resume Select Modal ── */
 .resume-select-body {
@@ -609,123 +610,8 @@ body.light .resume-type-btn {
   max-height: calc(100vh - 112px);
 }
 
-.resume-doc {
-  padding: 3rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
 
-.resume-header {
-  margin-bottom: 2.5rem;
-  padding-bottom: 2rem;
-  border-bottom: 1px solid var(--border);
-}
 
-.resume-name {
-  font-family: var(--font-display);
-  font-size: 2.5rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  line-height: 1.1;
-  margin-bottom: 0.5rem;
-}
-
-.resume-title-line {
-  font-family: var(--font-mono);
-  font-size: 0.85rem;
-  color: var(--accent);
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  margin-bottom: 1.5rem;
-  font-weight: 600;
-}
-
-.resume-contact-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem 2rem;
-}
-
-.resume-contact-item {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  letter-spacing: 0.03em;
-  text-decoration: none;
-  transition: color var(--transition);
-}
-
-.resume-contact-item:hover { color: var(--accent); }
-
-.resume-contact-item svg {
-  width: 14px;
-  height: 14px;
-  color: var(--accent);
-  flex-shrink: 0;
-}
-
-.resume-section { margin-bottom: 2rem; }
-
-.resume-section-title {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 1.25rem;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  font-weight: 600;
-}
-
-.resume-section-title::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: var(--border-accent);
-  opacity: 0.4;
-}
-
-.resume-summary {
-  font-size: 0.95rem;
-  color: var(--text-muted);
-  line-height: 1.8;
-}
-
-.resume-skills-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-}
-
-.resume-skill-row {
-  display: grid;
-  grid-template-columns: 150px 1fr;
-  gap: 1rem;
-  align-items: start;
-  font-size: 0.9rem;
-}
-
-/* Responsive */
-@media (max-width: 900px) {
-  .hero-wrap {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-  }
-
-  .hero-right {
-    justify-content: center;
-  }
-
-  .hero-photo-wrap {
-    max-width: 300px;
-  }
-}
 
 /* ── Resume View Modal — Download PDF Button ── */
 .resume-view-dl-btn {

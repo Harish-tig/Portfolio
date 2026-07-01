@@ -14,7 +14,7 @@ const experienceData = {
     {
       title: "Django-DRF Backend Engineer Intern",
       org: "Online Travel Agency Startup",
-      period: "Mar 2026 — Current",
+      period: "Mar 2026 — Apr 2026",
       location: "Remote",
       description:
         "Developed a robust backend API's using Django and Django REST Framework to support the startup's travel booking platform. Worked on features such as Channel Management, PMS via Bakun Api.",
@@ -25,9 +25,10 @@ const experienceData = {
 
   /* ── Certifications ── */
   certifications: [
-    { title: "Data Science & ML Using Python",  issuer: "Udemy",                year: "2026" },
-    { title: "Python for AIML",                issuer: "SAP Edunet Foundation", year: "2024" },
-    { title: "Advanced Python Course",          issuer: "Udemy",                year: "2023" },
+    { title: "AWS Practitioner", issuer: "Udemy", year: "Present" },
+    { title: "SQL BootCamp", issuer:"Udemy", year:"2026"},
+    { title: "Python for AIML", issuer: "SAP Edunet Foundation", year: "2024" },
+    { title: "Advanced Python Course", issuer: "Udemy", year: "2023" },
   ],
 
   /* ── Competitive Achievements ── */
@@ -69,19 +70,27 @@ const experienceData = {
     {
       icon: "⚙",
       title: "Joint Technical Head",
-      org: "Student's Council, Mumbai University",
-      period: "2025 — Present",
+      org: "Student's Council, UCOE",
+      period: "2025 — 2026",
       description:
-        "Lead technical strategy and execution for the college student council. Maintained college eventwebsite.",
+        "Lead technical strategy and execution for the college student council. Maintained college event website.",
     },
     {
       icon: "⚙",
       title: "Joint PRO Head",
-      org: "Student's Council, Mumbai University",
+      org: "Student's Council, UCOE",
       period: "2024 — 2025",
       description:
         "Managed public relations and communications for the student council. Coordinated with external stakeholders to promote college events and initiatives.",
     },
+    {
+      icon: "⚙",
+      title: "Joint Documentation Head",
+      org: "NSS unit, UCOE",
+      period: "2023 — 2024",
+      description:
+        "Oversaw documentation and reporting for the college's National Service Scheme unit. Ensured accurate record-keeping of activities and events.",
+    }
     
   ],
 };

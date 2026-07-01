@@ -215,10 +215,7 @@ body.light .pr-image {
   font-weight: 500;
   color: var(--text-primary);
   line-height: 1.2;
-  transition: color var(--transition-smooth);
 }
-
-.project-row:hover .pr-title { color: var(--accent); }
 
 .pr-desc {
   font-size: 0.92rem;          /* ↓ from 0.97rem */
@@ -340,9 +337,9 @@ body.light .modal-overlay {
 .modal {
   background: var(--bg-card);
   width: 100%;
-  max-width: 960px;
-  max-height: 90vh;
-  border-radius: 18px;
+  max-width: 680px;
+  max-height: 85vh;
+  border-radius: 16px;
   border: 1px solid var(--border-accent);
   overflow-y: auto;
   overscroll-behavior: contain;
@@ -365,7 +362,7 @@ body.light .modal {
 }
 
 .modal-header {
-  padding: 1.75rem 2.25rem;
+  padding: 1.25rem 1.75rem;
   border-bottom: 1px solid var(--border);
   display: flex;
   justify-content: space-between;
@@ -379,7 +376,7 @@ body.light .modal {
 
 .modal-title {
   font-family: var(--font-display);
-  font-size: 1.65rem;
+  font-size: 1.3rem;
   font-weight: 500;
   color: var(--text-primary);
 }
@@ -407,10 +404,10 @@ body.light .modal {
 }
 
 .modal-body {
-  padding: 2.25rem;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 2.25rem;
+  gap: 1.5rem;
 }
 
 .modal-image {
@@ -423,17 +420,17 @@ body.light .modal {
 }
 
 .modal-overview {
-  font-size: 1.05rem;
-  line-height: 1.85;
+  font-size: 0.92rem;
+  line-height: 1.8;
   color: var(--text-muted);
 }
 
 .modal-highlights-label {
   font-family: var(--font-display);
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   font-weight: 500;
   color: var(--text-primary);
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.75rem;
 }
 
 .modal-highlights {
@@ -445,10 +442,10 @@ body.light .modal {
 
 .modal-highlights li {
   position: relative;
-  padding: 0.85rem 1rem 0.85rem 2.25rem;
+  padding: 0.65rem 0.85rem 0.65rem 2rem;
   color: var(--text-muted);
-  font-size: 0.97rem;
-  line-height: 1.6;
+  font-size: 0.88rem;
+  line-height: 1.55;
   background: var(--bg-secondary);
   border-radius: 8px;
   border: 1px solid var(--border);
@@ -480,8 +477,21 @@ body.light .modal-highlights li {
 
 .modal-actions {
   display: flex;
-  gap: 1.25rem;
-  margin-top: 0.5rem;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.modal-actions .btn-primary,
+.modal-actions .btn-outline {
+  padding: 0.45rem 1rem;
+  font-size: 0.75rem;
+  gap: 0.4rem;
+}
+
+.modal-actions .btn-primary svg,
+.modal-actions .btn-outline svg {
+  width: 14px;
+  height: 14px;
 }
 
 @media (max-width: 900px) {

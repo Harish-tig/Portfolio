@@ -8,7 +8,7 @@ const resumeMLData = {
     location: "Mumbai, India",
   },
   summary:
-    "Final year B.E. student in AI & ML at Mumbai University (2026) with end-to-end experience across the ML lifecycle — data preprocessing, model architecture, training, evaluation, and deployment. Built production-ready models across computer vision, NLP, and time series domains.",
+    "I am a B.E. AI & ML graduate from Mumbai University (2026) with end-to-end experience across the ML lifecycle — data preprocessing, model architecture, training, evaluation, and deployment. Built production-ready models across computer vision, NLP, and time series domains.",
   skills: [
     { category: "Frameworks",  items: ["TensorFlow", "Keras", "Scikit-learn", "PyTorch"] },
     { category: "Techniques",  items: ["CNN", "LSTM", "Transfer Learning", "Time Series", "Feature Engineering"] },
@@ -69,7 +69,6 @@ const resumeMLData = {
   ],
   certifications: [
     { title: "Python for AIML",               issuer: "SAP Edunet Foundation", year: "2024" },
-    { title: "Data Science & ML Using Python", issuer: "Udemy",                year: "2026" },
     { title: "Python Advanced Course",         issuer: "Udemy",                year: "2023" },
   ],
 };

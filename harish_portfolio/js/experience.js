@@ -77,22 +77,6 @@
       </div>`;
   }
 
-  function buildEduCard(e) {
-    return `
-      <div class="exp-card exp-card--edu exp-reveal">
-        <div class="exp-card-head">
-          <div class="exp-card-left">
-            <div class="exp-card-title">${e.title}</div>
-            <div class="exp-card-org">${e.org}</div>
-          </div>
-          <div class="exp-card-right">
-            <div class="exp-card-period">${e.period}</div>
-          </div>
-        </div>
-        <p class="exp-card-desc">${e.description}</p>
-      </div>`;
-  }
-
   function setupReveal() {
     const els = document.querySelectorAll(".exp-reveal, .cert-card");
     const obs = new IntersectionObserver((entries) => {

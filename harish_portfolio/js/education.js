@@ -1,3 +1,4 @@
+// js/education.js — Education cards + Activities grid
 (function () {
   const GR_ICON = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>`;
   const CERT_ICON = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>`;
@@ -22,6 +23,24 @@
       </div>
     `).join("");
 
+    // Activities from experienceData (loaded via data/experience.js)
+    let activitiesHTML = "";
+    if (typeof experienceData !== "undefined" && experienceData.activities && experienceData.activities.length) {
+      activitiesHTML = `
+        <h3 class="activities-heading">Activities</h3>
+        <div class="activities-grid">
+          ${experienceData.activities.map(a => `
+            <div class="activity-card reveal">
+              <div class="activity-card-title">${a.title}</div>
+              <div class="activity-card-org">${a.org}</div>
+              <div class="activity-card-period">${a.period}</div>
+              <p class="activity-card-desc">${a.description}</p>
+            </div>
+          `).join("")}
+        </div>
+      `;
+    }
+
     section.innerHTML = `
       <div class="section-wrap">
         <span class="section-label">Background</span>
@@ -29,6 +48,7 @@
         <div class="education-list">
           ${cardsHTML}
         </div>
+        ${activitiesHTML}
       </div>
     `;
 

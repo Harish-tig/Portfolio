@@ -19,8 +19,8 @@
   };
 
   const RESUME_PATHS = {
-    backend: "resumes/backend/harish-nadar-backend.pdf",
-    ml: "resumes/ml/harish-nadar-ml.pdf",
+    backend: "resumes/backend/backend_resume.pdf",
+    ml: "resumes/ml/ml_resume.pdf",
   };
 
   function render() {
@@ -157,7 +157,6 @@
     setupTyping();
     setupQuotes();
     setupScrollParallax();
-    setupScrollProgress();
   }
 
   function setupQuotes() {
@@ -422,16 +421,6 @@
       if (!isInViewport(heroSection)) return;
       heroRight.style.transform = `translate(${mouseX}px, ${mouseY - scrollY * 0.12}px)`;
     }
-  }
-
-  function setupScrollProgress() {
-    const bar = document.getElementById("scroll-progress");
-    if (!bar) return;
-    window.addEventListener("scroll", () => {
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      bar.style.width = docHeight > 0 ? `${(scrollTop / docHeight) * 100}%` : "0%";
-    }, { passive: true });
   }
 
   function isInViewport(el) {

@@ -1,7 +1,7 @@
 const contactData = {
   heading: "Get In Touch",
   subtext:
-    "Open to ML/AI engineering and backend developer roles. Feel free to reach out.",
+    "Open to backend developer and ML/AI engineering roles. Feel free to reach out.",
   links: [
     {
       label: "Email",

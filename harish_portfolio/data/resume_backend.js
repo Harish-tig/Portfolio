@@ -8,7 +8,7 @@ const resumeBackendData = {
     location: "Mumbai, India",
   },
   summary:
-    "Final year B.E. student in AI & ML at Mumbai University (2026) with hands-on experience designing and deploying production-ready REST APIs using Django, FastAPI, and Flask. Focused on clean architecture, secure authentication, and scalable system design.",
+    "I am a B.E. AI & ML graduate from Mumbai University (2026) with hands-on experience designing and deploying production-ready REST APIs using Django, FastAPI, and Flask. Focused on clean architecture, secure authentication, and scalable system design.",
   skills: [
     { category: "Frameworks",  items: ["Django", "Django REST Framework", "FastAPI", "Flask"] },
     { category: "Databases",   items: ["PostgreSQL", "MongoDB", "Redis", "SQL"] },
@@ -65,24 +65,24 @@ const resumeBackendData = {
       cgpa: "8.5/10",
       description: "Final year student. Coursework includes Data Structures, DBMS, Operating Systems, Artificial Intelligence, and Machine Learning.",
     },
-    {
-      title: "HSC (12th Grade)",
-      org: "Maharashtra State Board",
-      period: "2020— 2022",
-      // cgpa: "57%",
-      description: "Completed Higher Secondary Certificate with a focus on Science stream, achieving 57% overall.",
-    },
-    {
-      title: "SSC (10th Grade)",
-      org: "Maharashtra State Board",
-      period: "2019 — 2020",
-      // cgpa: "89%",
-      description: "Completed Secondary School Certificate with an 89% score, demonstrating strong academic performance in foundational subjects.",
-    },
+    // {
+    //   title: "HSC (12th Grade)",
+    //   org: "Maharashtra State Board",
+    //   period: "2020— 2022",
+    //   // cgpa: "57%",
+    //   description: "Completed Higher Secondary Certificate with a focus on Science stream, achieving 57% overall.",
+    // },
+    // {
+    //   title: "SSC (10th Grade)",
+    //   org: "Maharashtra State Board",
+    //   period: "2019 — 2020",
+    //   // cgpa: "89%",
+    //   description: "Completed Secondary School Certificate with an 89% score, demonstrating strong academic performance in foundational subjects.",
+    // },
   ],
   certifications: [
-    { title: "Python for AIML",               issuer: "SAP Edunet Foundation", year: "2024" },
-    { title: "Data Science & ML Using Python", issuer: "Udemy",                year: "2026" },
-    { title: "Python Advanced Course",         issuer: "Udemy",                year: "2023" },
+    { title: "Python for AIML",issuer: "SAP Edunet Foundation", year: "2024" },
+    { title: "SQL BootCamp", issuer: "Udemy", year: "2026" },
+    { title: "Python Advanced Course", issuer: "Udemy",year: "2023" },
   ],
 };
