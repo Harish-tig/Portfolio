@@ -8,7 +8,7 @@ const skillsData = {
     {
       name: "Cloud",
       icon: "cloud",
-      skills: ["AWS", "EC2", "S3", "Lambda", "Autoscaling", "Load Balancing"],
+      skills: ["AWS", "EC2","Elastic Beanstalk", "S3", "Lambda", "Autoscaling", "Load Balancing"],
     },
     {
       name: "Databases",
