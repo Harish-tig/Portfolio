@@ -9,6 +9,7 @@
     eye: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>`,
     pin: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>`,
     chevron: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>`,
+    leetcode: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 8l-4 4 4 4M17 8l4 4-4 4M11 5l2 14"/></svg>',
   };
 
   const ICONS_SM = {
@@ -66,6 +67,7 @@
           <div class="hero-social">
             <a href="https://github.com/harish-tig" target="_blank" rel="noopener" title="GitHub">${ICONS.github}</a>
             <a href="https://linkedin.com/in/harish-nadar-tig" target="_blank" rel="noopener" title="LinkedIn">${ICONS.linkedin}</a>
+            <a href="https://leetcode.com/u/harish_tig/" target="_blank" rel="noopener" title="LeetCode">${ICONS.leetcode}</a>
             <a href="mailto:nadarharish03@gmail.com" title="Email">${ICONS.mail}</a>
           </div>
 
